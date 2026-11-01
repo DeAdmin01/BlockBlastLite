@@ -58,6 +58,11 @@ BlockBlastLite/
    ```bash
    dotnet publish -f net9.0-android -c Release
    ```
+### Интерфейс и геймплей
+<img width="1080" height="2202" alt="Screenshot_20261101_171631" src="https://github.com/user-attachments/assets/d4e3fa72-f587-41ce-9b10-5fbd7e2292f1" />
+<img width="1080" height="2202" alt="Screenshot_20261101_171626" src="https://github.com/user-attachments/assets/f53db915-530c-41e3-ad08-467640ea5327" />
+<img width="1080" height="2202" alt="Screenshot_20261101_172117" src="https://github.com/user-attachments/assets/75661849-7576-415c-92f8-d25626ad4aa0" />
+<img width="1080" height="2202" alt="Screenshot_20261101_172153" src="https://github.com/user-attachments/assets/8a3852c2-cf6e-4e21-bb00-27ff5b7c3a8e" />
 
 ## Автор
 
