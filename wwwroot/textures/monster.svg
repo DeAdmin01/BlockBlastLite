@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="monsterFur" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="60%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#115e59"/>
+    </linearGradient>
+    <linearGradient id="hornGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fluffy Monster Body -->
+  <rect width="128" height="128" rx="22" fill="url(#monsterFur)" stroke="#0f766e" stroke-width="2"/>
+
+  <!-- Cute Golden Horns -->
+  <path d="M 28 32 C 16 16, 26 4, 38 6 C 36 14, 38 24, 42 32 Z" fill="url(#hornGrad)" stroke="#a16207" stroke-width="1.5"/>
+  <path d="M 100 32 C 112 16, 102 4, 90 6 C 92 14, 90 24, 86 32 Z" fill="url(#hornGrad)" stroke="#a16207" stroke-width="1.5"/>
+
+  <!-- Big Cyclops Eye -->
+  <circle cx="64" cy="54" r="26" fill="#ffffff" stroke="#0f766e" stroke-width="3"/>
+  <circle cx="64" cy="54" r="16" fill="#6366f1"/>
+  <circle cx="64" cy="54" r="10" fill="#0f172a"/>
+  <!-- Shiny Eyeball Highlights -->
+  <circle cx="58" cy="48" r="4.5" fill="#ffffff"/>
+  <circle cx="70" cy="58" r="2" fill="#ffffff"/>
+
+  <!-- Cheerful Wide Grin with 1 Cute Fang -->
+  <path d="M 38 88 Q 64 116 90 88 Z" fill="#4c0519" stroke="#0f766e" stroke-width="2.5"/>
+  <!-- Cute Sharp White Tooth -->
+  <polygon points="50,88 56,88 53,97" fill="#ffffff"/>
+  <!-- Tongue -->
+  <path d="M 58 102 Q 64 96 70 102 Q 64 114 58 102 Z" fill="#fb7185"/>
+
+  <!-- Rosy Cute Blush Spots -->
+  <circle cx="28" cy="80" r="8" fill="#f43f5e" opacity="0.45"/>
+  <circle cx="100" cy="80" r="8" fill="#f43f5e" opacity="0.45"/>
+
+  <!-- Monster Fur Tuft on Head -->
+  <path d="M 58 16 L 64 8 L 70 16 Z" fill="url(#monsterFur)"/>
+</svg>

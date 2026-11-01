@@ -1,0 +1,61 @@
+@using BlockBlastLite.Models
+
+<div class="polyomino-container @Class"
+     style="@GetComputedContainerStyle()">
+    @for (int r = 0; r < (Piece?.Rows ?? 0); r++)
+    {
+        for (int c = 0; c < (Piece?.Cols ?? 0); c++)
+        {
+            if (Piece != null && Piece.Shape[r, c])
+            {
+                <div class="polyomino-block block-c@(Piece.ColorIndex) skin-@Skin"></div>
+            }
+            else
+            {
+                <div class="polyomino-block empty"></div>
+            }
+        }
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public GamePiece Piece { get; set; } = default!;
+    [Parameter] public string Class { get; set; } = "";
+    [Parameter] public string Style { get; set; } = "";
+    [Parameter] public string Skin { get; set; } = "jewel";
+
+    private string GetComputedContainerStyle()
+    {
+        int maxDim = Piece != null ? Math.Max(Piece.Rows, Piece.Cols) : 3;
+        int blockSize;
+        double gap;
+
+        if (maxDim >= 5)
+        {
+            blockSize = 16;
+            gap = 2;
+        }
+        else if (maxDim == 4)
+        {
+            blockSize = 19;
+            gap = 2.5;
+        }
+        else if (maxDim == 3)
+        {
+            blockSize = 23;
+            gap = 3;
+        }
+        else
+        {
+            blockSize = 26;
+            gap = 3.5;
+        }
+
+        string gapStr = gap.ToString("0.#", System.Globalization.CultureInfo.InvariantCulture);
+        string gridStyle = $"grid-template-rows: repeat({Piece?.Rows ?? 1}, 1fr); grid-template-columns: repeat({Piece?.Cols ?? 1}, 1fr); gap: {gapStr}px; --tray-block-size: {blockSize}px; --tray-gap: {gapStr}px;";
+
+        if (string.IsNullOrWhiteSpace(Style))
+            return gridStyle;
+        return $"{gridStyle} {Style}";
+    }
+}

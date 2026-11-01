@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Honey Amber Gradient -->
+    <radialGradient id="honeyBg" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="45%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </radialGradient>
+
+    <!-- Bee Body Yellow Gradient -->
+    <linearGradient id="beeYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+
+    <!-- Translucent Wings Gradient -->
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Honeycomb Honey Ground -->
+  <rect width="128" height="128" rx="16" fill="url(#honeyBg)"/>
+
+  <!-- Hexagonal Honeycomb Cell Pattern -->
+  <g stroke="#d97706" stroke-width="2" fill="none" opacity="0.6">
+    <!-- Center Hexagons -->
+    <polygon points="64,18 78,26 78,42 64,50 50,42 50,26"/>
+    <polygon points="36,34 50,42 50,58 36,66 22,58 22,42"/>
+    <polygon points="92,34 106,42 106,58 92,66 78,58 78,42"/>
+    <polygon points="64,50 78,58 78,74 64,82 50,74 50,58"/>
+    <polygon points="36,66 50,74 50,90 36,98 22,90 22,74"/>
+    <polygon points="92,66 106,74 106,90 92,98 78,90 78,74"/>
+    <polygon points="64,82 78,90 78,106 64,114 50,106 50,90"/>
+  </g>
+
+  <!-- Dripping Liquid Golden Honey from the top -->
+  <path d="M 0,0 L 128,0 L 128,18 Q 116,34 104,20 Q 92,14 82,28 Q 72,44 64,22 Q 52,14 42,32 Q 32,46 22,20 Q 12,14 0,22 Z" fill="#fef08a" opacity="0.8"/>
+  <circle cx="64" cy="28" r="2.5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="32" cy="38" r="3" fill="#ffffff" opacity="0.8"/>
+
+  <!-- CUTE BUMBLEBEE (Flying in center) -->
+  <g transform="translate(64, 68)">
+    <!-- WINGS (Translucent fluttering pair) -->
+    <!-- Left Wing -->
+    <ellipse cx="-12" cy="-18" rx="8" ry="14" transform="rotate(-35 -12 -18)" fill="url(#wingGrad)" stroke="#38bdf8" stroke-width="1.2"/>
+    <path d="M -12,-26 L -12,-12" stroke="#ffffff" stroke-width="1" opacity="0.8"/>
+    <!-- Right Wing -->
+    <ellipse cx="12" cy="-18" rx="8" ry="14" transform="rotate(35 12 -18)" fill="url(#wingGrad)" stroke="#38bdf8" stroke-width="1.2"/>
+    <path d="M 12,-26 L 12,-12" stroke="#ffffff" stroke-width="1" opacity="0.8"/>
+
+    <!-- BEE PLUMP OVAL BODY -->
+    <ellipse cx="0" cy="0" rx="22" ry="17" fill="url(#beeYellow)" stroke="#0f172a" stroke-width="2"/>
+
+    <!-- Black Velvet Stripes -->
+    <path d="M -7,-16 Q 0,-15 7,-16 L 7,16 Q 0,15 -7,16 Z" fill="#0f172a"/>
+    <path d="M 11,-14 Q 16,-13 18,-11 L 18,11 Q 16,13 11,14 Z" fill="#0f172a"/>
+
+    <!-- Stinger -->
+    <polygon points="22,-2 28,0 22,2" fill="#0f172a"/>
+
+    <!-- Cute Big Anime Eyes (Facing left) -->
+    <circle cx="-12" cy="-3" r="5" fill="#0f172a"/>
+    <circle cx="-14" cy="-5" r="2" fill="#ffffff"/>
+    <circle cx="-10" cy="-2" r="0.9" fill="#ffffff"/>
+
+    <!-- Little Pink Blush Cheek -->
+    <ellipse cx="-12" cy="5" rx="3" ry="2" fill="#f43f5e" opacity="0.6"/>
+
+    <!-- Cute Antennae -->
+    <path d="M -16,-10 Q -22,-18 -20,-22" stroke="#0f172a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <circle cx="-20" cy="-22" r="2" fill="#0f172a"/>
+    <path d="M -12,-12 Q -15,-20 -12,-24" stroke="#0f172a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <circle cx="-12" cy="-24" r="2" fill="#0f172a"/>
+  </g>
+
+  <!-- Honey sparkles -->
+  <circle cx="22" cy="98" r="2" fill="#ffffff"/>
+  <circle cx="106" cy="98" r="2.5" fill="#ffffff"/>
+  <circle cx="108" cy="24" r="1.8" fill="#ffffff"/>
+
+  <!-- Outer Golden Border -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="15" fill="none" stroke="#b45309" stroke-width="3" opacity="0.85"/>
+</svg>

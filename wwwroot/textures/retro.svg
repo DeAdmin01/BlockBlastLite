@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Top-left highlight bevel -->
+    <linearGradient id="retroHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.25"/>
+    </linearGradient>
+
+    <!-- Bottom-right shadow bevel -->
+    <linearGradient id="retroShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </linearGradient>
+
+    <!-- 3D Stud cylindrical gradient -->
+    <linearGradient id="studSurface" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.45"/>
+    </linearGradient>
+
+    <radialGradient id="studGlint" cx="35%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Top-left crisp bevel facets -->
+  <polygon points="0,0 128,0 114,14 14,14" fill="url(#retroHighlight)"/>
+  <polygon points="0,0 14,14 14,114 0,128" fill="url(#retroHighlight)" opacity="0.8"/>
+
+  <!-- Bottom-right deep shadow facets -->
+  <polygon points="128,0 128,128 114,114 114,14" fill="url(#retroShadow)"/>
+  <polygon points="0,128 14,114 114,114 128,128" fill="url(#retroShadow)"/>
+
+  <!-- Center Face Outline & Texture -->
+  <rect x="14" y="14" width="100" height="100" fill="#ffffff" opacity="0.06"/>
+  <rect x="14" y="14" width="100" height="100" fill="none" stroke="#000000" stroke-width="1.5" opacity="0.18"/>
+
+  <!-- 3D Cylindrical Stud Base Shadow -->
+  <ellipse cx="64" cy="68" rx="28" ry="24" fill="#000000" opacity="0.35"/>
+
+  <!-- 3D Cylindrical Stud Body -->
+  <circle cx="64" cy="63" r="26" fill="url(#studSurface)"/>
+  <circle cx="64" cy="63" r="26" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+
+  <!-- Stud Specular Crest -->
+  <ellipse cx="58" cy="54" rx="14" ry="7" fill="url(#studGlint)"/>
+
+  <!-- Tactile Inner Logo Ring -->
+  <circle cx="64" cy="63" r="14" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.45"/>
+  <circle cx="64" cy="63" r="14" fill="none" stroke="#000000" stroke-width="1.5" opacity="0.25"/>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="pumpkinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="50%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </linearGradient>
+    <linearGradient id="glowGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="stemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#84cc16"/>
+      <stop offset="100%" stop-color="#3f6212"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Pumpkin Ribbed Base Shape -->
+  <rect width="128" height="128" rx="22" fill="url(#pumpkinGrad)" stroke="#7c2d12" stroke-width="2"/>
+
+  <!-- Vertical pumpkin ribs -->
+  <path d="M 38 10 Q 24 64 38 118" stroke="#9a3412" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M 90 10 Q 104 64 90 118" stroke="#9a3412" stroke-width="3" fill="none" opacity="0.6"/>
+  <path d="M 64 8 Q 64 64 64 120" stroke="#c2410c" stroke-width="2.5" fill="none" opacity="0.4"/>
+
+  <!-- Green Stem -->
+  <path d="M 60 14 C 58 4, 66 2, 74 3 C 71 8, 68 12, 68 16 Z" fill="url(#stemGrad)" stroke="#365314" stroke-width="1.2"/>
+
+  <!-- Glowing Carved Jack-o'-Lantern Eyes (Triangles) -->
+  <g fill="url(#glowGlow)" stroke="#78350f" stroke-width="1.5">
+    <polygon points="36,46 54,46 45,62"/>
+    <polygon points="74,46 92,46 83,62"/>
+    <!-- Nose -->
+    <polygon points="64,64 58,72 70,72"/>
+  </g>
+
+  <!-- Glowing Toothy Carved Smile -->
+  <path d="M 28 82 Q 64 116 100 82 C 94 92, 88 88, 84 84 L 84 90 L 76 90 L 76 85 C 70 88, 64 88, 58 85 L 58 92 L 50 92 L 50 86 C 44 88, 38 90, 28 82 Z"
+        fill="url(#glowGlow)" stroke="#78350f" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- 3D Top Highlight -->
+  <ellipse cx="64" cy="22" rx="42" ry="8" fill="#ffffff" opacity="0.25"/>
+</svg>

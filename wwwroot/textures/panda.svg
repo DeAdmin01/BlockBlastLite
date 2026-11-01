@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Soft White Panda Fur -->
+    <radialGradient id="pandaFur" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+
+    <!-- Dark Fur Gradient -->
+    <linearGradient id="blackFur" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="50%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- Bamboo Leaf Gradient -->
+    <linearGradient id="bambooGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Soft White Panda Head (Edge to edge) -->
+  <rect width="128" height="128" rx="16" fill="url(#pandaFur)"/>
+
+  <!-- PANDA EARS (Top corners) -->
+  <!-- Left Ear -->
+  <g transform="translate(24, 22)">
+    <ellipse cx="0" cy="0" rx="18" ry="16" transform="rotate(-25)" fill="url(#blackFur)" stroke="#0f172a" stroke-width="2"/>
+    <ellipse cx="2" cy="2" rx="10" ry="8" transform="rotate(-25)" fill="#475569" opacity="0.4"/>
+  </g>
+  <!-- Right Ear -->
+  <g transform="translate(104, 22)">
+    <ellipse cx="0" cy="0" rx="18" ry="16" transform="rotate(25)" fill="url(#blackFur)" stroke="#0f172a" stroke-width="2"/>
+    <ellipse cx="-2" cy="2" rx="10" ry="8" transform="rotate(25)" fill="#475569" opacity="0.4"/>
+  </g>
+
+  <!-- PANDA EYE PATCHES (Chubby tilted dark ovals) -->
+  <!-- Left Eye Patch -->
+  <g transform="translate(42, 60)">
+    <ellipse cx="0" cy="0" rx="16" ry="19" transform="rotate(20)" fill="url(#blackFur)"/>
+    <!-- Left Eye Pupil & Specular Anime Star/Circle -->
+    <circle cx="2" cy="1" r="7" fill="#ffffff"/>
+    <circle cx="2" cy="1" r="4.8" fill="#0f172a"/>
+    <circle cx="0" cy="-1" r="2.2" fill="#ffffff"/>
+    <circle cx="4" cy="3" r="1.1" fill="#ffffff"/>
+  </g>
+
+  <!-- Right Eye Patch -->
+  <g transform="translate(86, 60)">
+    <ellipse cx="0" cy="0" rx="16" ry="19" transform="rotate(-20)" fill="url(#blackFur)"/>
+    <!-- Right Eye Pupil & Specular Anime Star/Circle -->
+    <circle cx="-2" cy="1" r="7" fill="#ffffff"/>
+    <circle cx="-2" cy="1" r="4.8" fill="#0f172a"/>
+    <circle cx="-4" cy="-1" r="2.2" fill="#ffffff"/>
+    <circle cx="0" cy="3" r="1.1" fill="#ffffff"/>
+  </g>
+
+  <!-- Cute Pink Cheeks -->
+  <ellipse cx="26" cy="78" rx="8" ry="5" fill="#f472b6" opacity="0.45"/>
+  <ellipse cx="102" cy="78" rx="8" ry="5" fill="#f472b6" opacity="0.45"/>
+
+  <!-- NOSE & MOUTH (Center bottom) -->
+  <g transform="translate(64, 84)">
+    <!-- Chubby cute black nose -->
+    <ellipse cx="0" cy="0" rx="9" ry="6" fill="url(#blackFur)"/>
+    <ellipse cx="-2" cy="-2" rx="3.5" ry="1.8" fill="#ffffff" opacity="0.75"/>
+
+    <!-- W-Mouth curve -->
+    <path d="M -8,7 Q -4,13 0,8 Q 4,13 8,7" stroke="#1e293b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Fresh Bamboo Stalk / Leaf Sprig in mouth corner -->
+  <g transform="translate(74, 94)">
+    <path d="M 0,0 Q 14,8 32,2" stroke="#4ade80" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M 16,3 C 24,-6 36,-4 42,-2 C 34,4 26,4 16,3 Z" fill="url(#bambooGrad)" stroke="#15803d" stroke-width="1.2"/>
+  </g>
+
+  <!-- Outer Cartoon Rounded Border -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="15" fill="none" stroke="#1e293b" stroke-width="3" opacity="0.8"/>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="456" height="456" viewBox="0 0 456 456" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <g id="block-blast-icon" transform="translate(0, 0)">
+        <!-- Top Left Block -->
+        <rect x="132" y="132" width="86" height="86" rx="18" fill="#3B82F6" stroke="#60A5FA" stroke-width="4" />
+        <rect x="144" y="144" width="28" height="28" rx="8" fill="#FFFFFF" opacity="0.3" />
+        
+        <!-- Top Right Block -->
+        <rect x="238" y="132" width="86" height="86" rx="18" fill="#8B5CF6" stroke="#A78BFA" stroke-width="4" />
+        <rect x="250" y="144" width="28" height="28" rx="8" fill="#FFFFFF" opacity="0.3" />
+
+        <!-- Bottom Left Block -->
+        <rect x="132" y="238" width="86" height="86" rx="18" fill="#10B981" stroke="#34D399" stroke-width="4" />
+        <rect x="144" y="250" width="28" height="28" rx="8" fill="#FFFFFF" opacity="0.3" />
+
+        <!-- Bottom Right Block -->
+        <rect x="238" y="238" width="86" height="86" rx="18" fill="#F43F5E" stroke="#FB7185" stroke-width="4" />
+        <rect x="250" y="250" width="28" height="28" rx="8" fill="#FFFFFF" opacity="0.3" />
+
+        <!-- Center Blast Sparkle (Minimalist 4-pointed star) -->
+        <path d="M 228,198 C 228,218 238,228 258,228 C 238,228 228,238 228,258 C 228,238 218,228 198,228 C 218,228 228,218 228,198 Z" fill="#FFFFFF" opacity="0.95" />
+    </g>
+</svg>

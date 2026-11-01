@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="goldPlate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="25%" stop-color="#fde047"/>
+      <stop offset="60%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="goldBevel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+    <linearGradient id="specularArc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Solid Cartoon Gold Body -->
+  <rect width="128" height="128" rx="15" fill="url(#goldPlate)"/>
+
+  <!-- Thick Cartoon Bevel Border -->
+  <rect x="8" y="8" width="112" height="112" rx="10" fill="none" stroke="url(#goldBevel)" stroke-width="6"/>
+  <rect x="14" y="14" width="100" height="100" rx="7" fill="none" stroke="#78350f" stroke-width="2" opacity="0.35"/>
+
+  <!-- Inner Embossed Bullion Stamp -->
+  <rect x="24" y="24" width="80" height="80" rx="6" fill="#facc15" stroke="#ca8a04" stroke-width="2.5" opacity="0.9"/>
+  <!-- 45-degree cartoon gleam ribbon across the center -->
+  <polygon points="26,102 70,26 84,26 40,102" fill="#ffffff" opacity="0.45"/>
+
+  <!-- Curved Cartoon Specular Gloss Arc on Top -->
+  <path d="M16,16 Q64,28 112,16 Q64,8 16,16 Z" fill="url(#specularArc)"/>
+
+  <!-- Exaggerated Cartoon Sparkle Stars -->
+  <!-- Top right gleaming star -->
+  <path d="M96,24 Q96,34 106,34 Q96,34 96,44 Q96,34 86,34 Q96,34 96,24 Z" fill="#ffffff"/>
+  <circle cx="96" cy="34" r="2.5" fill="#fef08a"/>
+  <!-- Bottom left twinkle -->
+  <circle cx="32" cy="94" r="3.5" fill="#ffffff"/>
+  <circle cx="38" cy="88" r="1.5" fill="#ffffff"/>
+</svg>

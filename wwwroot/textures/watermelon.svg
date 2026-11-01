@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Ripe Red Watermelon Flesh -->
+    <linearGradient id="pulpFull" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fb7185"/>
+      <stop offset="35%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#be123c"/>
+    </linearGradient>
+    <!-- Striped Outer Skin Pattern -->
+    <linearGradient id="skinBase" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base block fill: Full edge-to-edge -->
+  <rect width="128" height="128" rx="14" fill="url(#pulpFull)"/>
+
+  <!-- Crisp White / Pale-Mint Inner Rind Band (spans y=96 to 106) -->
+  <rect x="0" y="96" width="128" height="10" fill="#ecfdf5"/>
+  <rect x="0" y="96" width="128" height="3" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Dark Green Striped Bottom Rind (spans y=106 to 128) -->
+  <path d="M 0,106 L 128,106 L 128,114 C 128,123 123,128 114,128 L 14,128 C 5,128 0,123 0,114 Z" fill="url(#skinBase)"/>
+  <!-- Watermelon Skin Stripes -->
+  <path d="M 16,106 Q 20,118 16,128" stroke="#052e16" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M 38,106 Q 44,118 40,128" stroke="#052e16" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M 64,106 Q 62,118 64,128" stroke="#052e16" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M 88,106 Q 84,118 88,128" stroke="#052e16" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M 110,106 Q 114,118 110,128" stroke="#052e16" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+  <!-- Top Specular Gloss Highlight -->
+  <path d="M 12,10 Q 64,24 116,10 Q 64,4 12,10 Z" fill="#ffffff" opacity="0.45"/>
+  <circle cx="22" cy="18" r="4.5" fill="#ffffff" opacity="0.6"/>
+
+  <!-- Juicy Cartoon Seeds (Teardrop shape with white specular dots) -->
+  <!-- Top Left -->
+  <g transform="translate(32,32) rotate(-15)">
+    <path d="M 0,-10 C -5,-4 -4,5 0,8 C 4,5 5,-4 0,-10 Z" fill="#0f172a"/>
+    <circle cx="-1.5" cy="1" r="1.8" fill="#ffffff"/>
+  </g>
+  <!-- Top Right -->
+  <g transform="translate(94,30) rotate(20)">
+    <path d="M 0,-10 C -5,-4 -4,5 0,8 C 4,5 5,-4 0,-10 Z" fill="#0f172a"/>
+    <circle cx="-1.5" cy="1" r="1.8" fill="#ffffff"/>
+  </g>
+  <!-- Center -->
+  <g transform="translate(64,52) rotate(5)">
+    <path d="M 0,-11 C -5.5,-4 -4.5,6 0,9 C 4.5,6 5.5,-4 0,-11 Z" fill="#0f172a"/>
+    <circle cx="-1.8" cy="1" r="2" fill="#ffffff"/>
+  </g>
+  <!-- Bottom Left -->
+  <g transform="translate(26,72) rotate(10)">
+    <path d="M 0,-10 C -5,-4 -4,5 0,8 C 4,5 5,-4 0,-10 Z" fill="#0f172a"/>
+    <circle cx="-1.5" cy="1" r="1.8" fill="#ffffff"/>
+  </g>
+  <!-- Bottom Right -->
+  <g transform="translate(100,70) rotate(-20)">
+    <path d="M 0,-10 C -5,-4 -4,5 0,8 C 4,5 5,-4 0,-10 Z" fill="#0f172a"/>
+    <circle cx="-1.5" cy="1" r="1.8" fill="#ffffff"/>
+  </g>
+  <!-- Lower Center Left -->
+  <g transform="translate(60,82) rotate(-8)">
+    <path d="M 0,-8 C -4,-3 -3,4 0,6 C 3,4 4,-3 0,-8 Z" fill="#0f172a"/>
+    <circle cx="-1.2" cy="0.8" r="1.4" fill="#ffffff"/>
+  </g>
+
+  <!-- Cartoon Border Outline -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="13" fill="none" stroke="#15803d" stroke-width="3" opacity="0.75"/>
+</svg>

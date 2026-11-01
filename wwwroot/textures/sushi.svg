@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Nori dark gradient -->
+    <linearGradient id="noriGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14261c"/>
+      <stop offset="60%" stop-color="#09140e"/>
+      <stop offset="100%" stop-color="#020805"/>
+    </linearGradient>
+
+    <!-- Rice bed gradient -->
+    <radialGradient id="riceGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="70%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+
+    <!-- Salmon core gradient -->
+    <linearGradient id="salmonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7f50"/>
+      <stop offset="40%" stop-color="#ff6347"/>
+      <stop offset="100%" stop-color="#e0402b"/>
+    </linearGradient>
+
+    <!-- Avocado wedge gradient -->
+    <linearGradient id="avocadoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bef264"/>
+      <stop offset="100%" stop-color="#65a30d"/>
+    </linearGradient>
+
+    <!-- Tamago yellow gradient -->
+    <linearGradient id="tamagoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Nori Outer Seaweed Wrap (Full-bleed edge with soft round corners) -->
+  <rect width="128" height="128" rx="16" fill="url(#noriGrad)"/>
+  <rect x="2" y="2" width="124" height="124" rx="15" fill="none" stroke="#1f3b2d" stroke-width="2" opacity="0.6"/>
+  <!-- Nori surface texture crinkles -->
+  <path d="M 6,24 Q 30,28 64,22 T 122,26 M 8,64 Q 40,60 80,66 T 120,62 M 6,104 Q 50,98 90,106 T 122,100" stroke="#050e09" stroke-width="1.8" fill="none" opacity="0.7"/>
+
+  <!-- 2. Plump Sushi Rice Ring (Thick appetizing circular bed) -->
+  <circle cx="64" cy="64" r="50" fill="url(#riceGrad)" stroke="#cbd5e1" stroke-width="2"/>
+
+  <!-- Rice grain micro-textures around the ring -->
+  <!-- Top grains -->
+  <ellipse cx="64" cy="22" rx="6" ry="3.5" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="48" cy="25" rx="5.5" ry="3.2" transform="rotate(-15 48 25)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="80" cy="25" rx="5.5" ry="3.2" transform="rotate(15 80 25)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="34" cy="34" rx="5" ry="3" transform="rotate(-35 34 34)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="94" cy="34" rx="5" ry="3" transform="rotate(35 94 34)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <!-- Side grains -->
+  <ellipse cx="22" cy="52" rx="3.5" ry="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="22" cy="76" rx="3.5" ry="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="106" cy="52" rx="3.5" ry="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="106" cy="76" rx="3.5" ry="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <!-- Bottom grains -->
+  <ellipse cx="34" cy="94" rx="5" ry="3" transform="rotate(35 34 94)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="94" cy="94" rx="5" ry="3" transform="rotate(-35 94 94)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="48" cy="103" rx="5.5" ry="3.2" transform="rotate(15 48 103)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="80" cy="103" rx="5.5" ry="3.2" transform="rotate(-15 80 103)" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+  <ellipse cx="64" cy="106" rx="6" ry="3.5" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+
+  <!-- 3. Inner Filling Core -->
+  <!-- Tamago (Sweet Egg) Slice - Top Left -->
+  <path d="M 64,64 L 40,46 C 44,40 54,36 64,36 Z" fill="url(#tamagoGrad)" stroke="#ca8a04" stroke-width="1.2"/>
+  <!-- Cucumber Wedge - Top Right -->
+  <path d="M 64,64 L 64,36 C 74,36 84,40 88,46 Z" fill="#22c55e" stroke="#15803d" stroke-width="1.2"/>
+  <path d="M 66,42 Q 74,40 82,45" stroke="#86efac" stroke-width="1.5" fill="none"/>
+
+  <!-- Avocado Wedge - Right -->
+  <path d="M 64,64 L 88,46 C 94,54 94,74 88,82 Z" fill="url(#avocadoGrad)" stroke="#4d7c0f" stroke-width="1.2"/>
+  <!-- Avocado inner light curve -->
+  <path d="M 72,56 Q 80,64 72,74" stroke="#d9f99d" stroke-width="2" fill="none" opacity="0.8"/>
+
+  <!-- Fresh Salmon Core - Bottom Left / Center -->
+  <path d="M 64,64 L 40,46 C 34,54 34,74 40,82 L 64,64 Z" fill="url(#salmonGrad)" stroke="#c2410c" stroke-width="1.2"/>
+  <path d="M 64,64 L 40,82 C 48,90 80,90 88,82 Z" fill="url(#salmonGrad)" stroke="#c2410c" stroke-width="1.2"/>
+  <!-- Salmon White Fat Marbling Stripes -->
+  <path d="M 44,56 Q 54,66 48,78" stroke="#ffffff" stroke-width="1.8" fill="none" opacity="0.85" stroke-linecap="round"/>
+  <path d="M 52,50 Q 62,64 58,82" stroke="#ffffff" stroke-width="1.8" fill="none" opacity="0.85" stroke-linecap="round"/>
+  <path d="M 60,62 Q 68,72 74,80" stroke="#ffffff" stroke-width="1.8" fill="none" opacity="0.85" stroke-linecap="round"/>
+
+  <!-- Cute Cartoon Tobiko (Orange roe eggs) scattered in center -->
+  <circle cx="60" cy="58" r="3.2" fill="#fb923c" stroke="#c2410c" stroke-width="0.8"/>
+  <circle cx="59" cy="57" r="1" fill="#ffffff"/>
+  <circle cx="68" cy="62" r="3.5" fill="#f97316" stroke="#c2410c" stroke-width="0.8"/>
+  <circle cx="67" cy="61" r="1.1" fill="#ffffff"/>
+  <circle cx="63" cy="69" r="3" fill="#fb923c" stroke="#c2410c" stroke-width="0.8"/>
+  <circle cx="62" cy="68" r="0.9" fill="#ffffff"/>
+
+  <!-- Glossy specular shine arc on top nori corner -->
+  <path d="M 16,16 Q 64,28 112,16" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.4" stroke-linecap="round"/>
+  <!-- Chunky Cartoon Outline -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="15" fill="none" stroke="#000000" stroke-width="3" opacity="0.85"/>
+</svg>

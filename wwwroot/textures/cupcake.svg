@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Bakery Card Ambient -->
+    <linearGradient id="cupcakeBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4a042e"/>
+      <stop offset="50%" stop-color="#2d021c"/>
+      <stop offset="100%" stop-color="#14010d"/>
+    </linearGradient>
+
+    <!-- Pleated Cup Gradient (Pastel Mint) -->
+    <linearGradient id="cupLiner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6ee7b7"/>
+      <stop offset="40%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+
+    <!-- Sponge Cake Peak Gradient -->
+    <linearGradient id="spongeCake" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fed7aa"/>
+      <stop offset="50%" stop-color="#fba444"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Whipped Frosting 3D Swirl Gradient -->
+    <linearGradient id="creamGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff1f2"/>
+      <stop offset="35%" stop-color="#fbcfe8"/>
+      <stop offset="70%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+
+    <!-- Cherry Glossy Glaze -->
+    <radialGradient id="cherryGlaze" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#fca5a5"/>
+      <stop offset="35%" stop-color="#ef4444"/>
+      <stop offset="80%" stop-color="#b91c1c"/>
+      <stop offset="100%" stop-color="#450a0a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 1. Ambient Squircle Backing -->
+  <rect width="128" height="128" rx="24" fill="url(#cupcakeBg)"/>
+  <rect x="2" y="2" width="124" height="124" rx="22" fill="none" stroke="#f472b6" stroke-width="2" opacity="0.4"/>
+
+  <!-- 2. Pleated Paper Baking Cup (Bottom) -->
+  <!-- Cup Shadow -->
+  <polygon points="26,76 102,76 88,122 40,122" fill="#000000" opacity="0.4"/>
+  <!-- Main Liner -->
+  <polygon points="24,72 104,72 88,118 40,118" fill="url(#cupLiner)" stroke="#065f46" stroke-width="2"/>
+
+  <!-- Liner Vertical Pleat Ribs -->
+  <g stroke="#047857" stroke-width="2" opacity="0.6">
+    <line x1="36" y1="72" x2="48" y2="118"/>
+    <line x1="48" y1="72" x2="56" y2="118"/>
+    <line x1="60" y1="72" x2="64" y2="118"/>
+    <line x1="72" y1="72" x2="72" y2="118"/>
+    <line x1="84" y1="72" x2="80" y2="118"/>
+    <line x1="94" y1="72" x2="86" y2="118"/>
+  </g>
+  <!-- Pleat Scalloped Top Rim -->
+  <path d="M 24 72 Q 36 75 48 72 Q 60 75 72 72 Q 84 75 96 72 Q 104 74 104 72" stroke="#a7f3d0" stroke-width="2.5" fill="none"/>
+
+  <!-- Golden Baked Cake Crust Layer -->
+  <ellipse cx="64" cy="71" rx="42" ry="10" fill="url(#spongeCake)" stroke="#b45309" stroke-width="1.5"/>
+
+  <!-- 3. Fluffy 3D Whipped Strawberry Frosting Cloud -->
+  <!-- Layer 1: Wide Bottom Cloud Tier -->
+  <path d="M 16 66 C 14 52, 34 46, 44 50 C 50 42, 78 42, 84 50 C 94 46, 114 52, 112 66 C 110 74, 98 76, 88 74 C 74 76, 54 76, 40 74 C 30 76, 18 74, 16 66 Z"
+        fill="url(#creamGrad)" stroke="#9d174d" stroke-width="2.5"/>
+
+  <!-- Layer 2: Mid Swirl -->
+  <path d="M 26 50 C 24 36, 46 32, 58 36 C 68 28, 88 30, 94 40 C 102 52, 88 56, 68 54 C 48 54, 30 56, 26 50 Z"
+        fill="url(#creamGrad)" stroke="#9d174d" stroke-width="2.5"/>
+
+  <!-- Layer 3: Top Cream Dollop & Peak -->
+  <path d="M 44 36 C 42 22, 60 16, 66 22 C 76 20, 84 28, 80 36 C 76 42, 50 42, 44 36 Z"
+        fill="#fff1f2" stroke="#db2777" stroke-width="2"/>
+
+  <!-- Frosting Specular Highlight Sheen Arcs -->
+  <path d="M 32 44 Q 50 36 68 44" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M 48 26 Q 58 20 68 26" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M 76 50 Q 94 48 100 58" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.6"/>
+
+  <!-- 4. Colorful Rainbow Candy Sprinkles -->
+  <!-- Golden Yellow -->
+  <rect x="36" y="56" width="6" height="3" rx="1.5" transform="rotate(25 36 56)" fill="#fde047" stroke="#ca8a04" stroke-width="0.8"/>
+  <rect x="82" y="44" width="6" height="3" rx="1.5" transform="rotate(-30 82 44)" fill="#fde047" stroke="#ca8a04" stroke-width="0.8"/>
+  <!-- Neon Cyan -->
+  <rect x="52" y="44" width="6" height="3" rx="1.5" transform="rotate(-40 52 44)" fill="#38bdf8" stroke="#0284c7" stroke-width="0.8"/>
+  <rect x="76" y="60" width="6" height="3" rx="1.5" transform="rotate(45 76 60)" fill="#38bdf8" stroke="#0284c7" stroke-width="0.8"/>
+  <!-- Bright Lime -->
+  <rect x="64" y="52" width="6" height="3" rx="1.5" transform="rotate(15 64 52)" fill="#4ade80" stroke="#16a34a" stroke-width="0.8"/>
+  <rect x="94" y="58" width="6" height="3" rx="1.5" transform="rotate(-15 94 58)" fill="#4ade80" stroke="#16a34a" stroke-width="0.8"/>
+  <!-- Magic Purple -->
+  <rect x="42" y="42" width="6" height="3" rx="1.5" transform="rotate(60 42 42)" fill="#c084fc" stroke="#7e22ce" stroke-width="0.8"/>
+  <rect x="58" y="32" width="5.5" height="2.8" rx="1.4" transform="rotate(-20 58 32)" fill="#f43f5e" stroke="#9f1239" stroke-width="0.8"/>
+
+  <!-- 5. Big Glazed Ruby Maraschino Cherry with Stem -->
+  <!-- Curved Green Stem -->
+  <path d="M 64 16 C 64 4, 78 0, 84 0" stroke="#16a34a" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <!-- Cherry Shadow -->
+  <ellipse cx="64" cy="24" rx="13" ry="5" fill="#881337" opacity="0.6"/>
+  <!-- Cherry Sphere -->
+  <circle cx="64" cy="18" r="14" fill="url(#cherryGlaze)" stroke="#881337" stroke-width="2"/>
+  <!-- Cherry Gloss Star Sparkle -->
+  <circle cx="59" cy="13" r="3.8" fill="#ffffff"/>
+  <polygon points="59,8 60,11 63,12 60,13 59,16 58,13 55,12 58,11" fill="#ffffff"/>
+</svg>

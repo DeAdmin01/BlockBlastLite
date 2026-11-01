@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="catBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="60%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+    <radialGradient id="innerEar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </radialGradient>
+    <linearGradient id="blushGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f43f5e" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#f43f5e" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cat Base Rounded Card -->
+  <rect width="128" height="128" rx="20" fill="url(#catBg)" stroke="#f59e0b" stroke-width="2"/>
+
+  <!-- Kitty Ears -->
+  <path d="M 22 42 L 36 12 L 56 34 Z" fill="#f59e0b" stroke="#d97706" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M 27 38 L 37 18 L 51 33 Z" fill="url(#innerEar)"/>
+
+  <path d="M 106 42 L 92 12 L 72 34 Z" fill="#f59e0b" stroke="#d97706" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M 101 38 L 91 18 L 77 33 Z" fill="url(#innerEar)"/>
+
+  <!-- Cheek Blushes -->
+  <circle cx="30" cy="76" r="10" fill="#fca5a5" opacity="0.6"/>
+  <circle cx="98" cy="76" r="10" fill="#fca5a5" opacity="0.6"/>
+
+  <!-- Cute Closed Happy Eyes (Arc) -->
+  <path d="M 36 60 Q 46 50 54 60" stroke="#78350f" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 74 60 Q 82 50 92 60" stroke="#78350f" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+  <!-- Tiny Heart Nose -->
+  <path d="M 64 71 C 61 67, 57 69, 58 72 C 59 75, 64 78, 64 78 C 64 78, 69 75, 70 72 C 71 69, 67 67, 64 71 Z" fill="#f43f5e"/>
+
+  <!-- Cute Cat Mouth (:3) -->
+  <path d="M 54 78 Q 59 84 64 79 Q 69 84 74 78" stroke="#78350f" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Whiskers -->
+  <!-- Left -->
+  <line x1="16" y1="68" x2="38" y2="72" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="14" y1="80" x2="38" y2="80" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Right -->
+  <line x1="112" y1="68" x2="90" y2="72" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="114" y1="80" x2="90" y2="80" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Forehead Tabby Stripes -->
+  <path d="M 64 26 L 64 36" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 56 28 L 59 36" stroke="#d97706" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M 72 28 L 69 36" stroke="#d97706" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="facetTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="facetLeft" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="facetBottom" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="facetRight" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base outer border chamfer -->
+  <polygon points="0,0 128,0 96,28 32,28" fill="url(#facetTop)"/>
+  <polygon points="0,0 28,32 28,96 0,128" fill="url(#facetLeft)"/>
+  <polygon points="0,128 32,100 96,100 128,128" fill="url(#facetBottom)"/>
+  <polygon points="128,0 100,32 100,96 128,128" fill="url(#facetRight)"/>
+
+  <!-- Center gemstone table facet -->
+  <polygon points="28,28 100,28 100,100 28,100" fill="rgba(255,255,255,0.18)"/>
+
+  <!-- Diagonal facet division lines -->
+  <line x1="0" y1="0" x2="28" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+  <line x1="128" y1="0" x2="100" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+  <line x1="128" y1="128" x2="100" y2="100" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+  <line x1="0" y1="128" x2="28" y2="100" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Inner brilliant star glint in top-left -->
+  <circle cx="28" cy="28" r="4" fill="#ffffff" opacity="0.95"/>
+  <path d="M28,16 L28,40 M16,28 L40,28" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="82" cy="74" r="2" fill="#ffffff" opacity="0.7"/>
+</svg>

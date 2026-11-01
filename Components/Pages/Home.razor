@@ -1,0 +1,1278 @@
+@page "/"
+@implements IDisposable
+@inject GameEngine Game
+@inject IDynamicThemeService DynamicTheme
+@inject IJSRuntime JS
+
+<div class="game-app-container skin-@currentSkin" data-skin="@currentSkin">
+    <!-- Top Header -->
+    <header class="game-header">
+        <div class="brand-section">
+            <div class="brand-icon">
+                <SvgIcon Name="logo" />
+            </div>
+            <span class="brand-title">BLOCK BLAST</span>
+        </div>
+
+        <div class="header-actions">
+            <button type="button" class="icon-btn" @onclick="ToggleSound" title="Звук">
+                <SvgIcon Name="@(isSoundMuted ? "sound-off" : "sound-on")" />
+            </button>
+            <button type="button" class="icon-btn" data-action="restart" @onclick="RestartGame" title="Новая игра">
+                <SvgIcon Name="restart" />
+            </button>
+            <button type="button" class="icon-btn" @onclick="() => showSettings = true" title="Настройки">
+                <SvgIcon Name="settings" />
+            </button>
+        </div>
+    </header>
+
+    <!-- Score & High Score Cards -->
+    <section class="score-board">
+        <div class="score-card accent-card">
+            <div class="score-label-row">
+                <SvgIcon Name="score" />
+                <span>СЧЁТ</span>
+            </div>
+            <div class="score-value">@Game.Score</div>
+        </div>
+
+        <div class="score-card">
+            <div class="score-label-row">
+                <SvgIcon Name="trophy" />
+                <span>РЕКОРД</span>
+            </div>
+            <div class="score-value">@Game.HighScore</div>
+        </div>
+    </section>
+
+    <!-- Combo Streak Notification & Visual Shoutouts -->
+    <div class="combo-banner-container">
+        @if (showShoutoutBanner && currentShoutout != ShoutoutType.None)
+        {
+            <div class="shoutout-banner-wrapper" @key="shoutoutDisplayKey">
+                <div class="shoutout-badge shoutout-@currentShoutout.ToString().ToLower()">
+                    <div class="shoutout-glare"></div>
+                    <span class="shoutout-word">@GetShoutoutTitle(currentShoutout)</span>
+                    @if (currentShoutoutBonus > 0)
+                    {
+                        <span class="shoutout-bonus-chip">
+                            +@currentShoutoutBonus
+                            @if (currentShoutoutMultiplier > 1)
+                            {
+                                <span class="shoutout-mult-tag">&times;@currentShoutoutMultiplier</span>
+                            }
+                        </span>
+                    }
+                </div>
+            </div>
+        }
+        else if (Game.ComboStreak > 1)
+        {
+            <div class="combo-badge" @key="comboDisplayKey">
+                <div class="combo-icon-pill">
+                    <SvgIcon Name="zap" Class="combo-icon" />
+                </div>
+                <span class="combo-text">КОМБО</span>
+                <span class="combo-multiplier">&times;@(Game.ComboStreak)</span>
+            </div>
+        }
+    </div>
+
+    <!-- 8x8 Playfield Grid (Isolated Component Optimization) -->
+    <BoardView @ref="boardViewRef" Board="Game.Board" CurrentSkin="@currentSkin" OnCellClick="HandleBoardCellClick" />
+
+    <!-- Polyomino Piece Tray -->
+    <footer class="piece-tray">
+        @foreach (var piece in Game.CurrentPieces)
+        {
+            var p = piece;
+            bool isSelected = selectedPieceId == p.Id;
+            string slotClass = "piece-slot";
+            if (p.IsUsed) slotClass += " disabled";
+            else if (isSelected) slotClass += " selected";
+
+            <div class="@slotClass"
+                 id="slot-@p.Id"
+                 @onclick="() => HandlePieceSelect(p)"
+                 @onpointerdown="(e) => HandlePiecePointerDown(e, p)">
+                @if (!p.IsUsed)
+                {
+                    <GamePieceView Piece="p" Skin="@currentSkin" />
+                }
+                else
+                {
+                    <div class="slot-placeholder"></div>
+                }
+            </div>
+        }
+    </footer>
+
+    <!-- Floating Drag Ghost for Pointer Dragging -->
+    <div id="drag-floating-ghost" class="floating-drag-ghost"></div>
+
+</div>
+
+<!-- Game Over Modal (outside game-app-container to avoid touch-action:none inheritance) -->
+@if (Game.IsGameOver)
+{
+    <div class="modal-overlay">
+        <div class="modal-dialog">
+            <h2 class="modal-title">ИГРА ОКОНЧЕНА</h2>
+            <p class="modal-subtitle">Нет доступных ходов для оставшихся фигур</p>
+
+            <div class="modal-stats">
+                <div class="modal-stat-item">
+                    <span class="stat-label">СЧЁТ</span>
+                    <span class="stat-value">@Game.Score</span>
+                </div>
+                <div class="modal-stat-item">
+                    <span class="stat-label">РЕКОРД</span>
+                    <span class="stat-value">@Game.HighScore</span>
+                </div>
+                <div class="modal-stat-item">
+                    <span class="stat-label">МАКС КОМБО</span>
+                    <span class="stat-value">&times;@Game.MaxCombo</span>
+                </div>
+            </div>
+
+            <button type="button" class="primary-btn" @onclick="RestartGame">
+                <SvgIcon Name="restart" />
+                <span>ИГРАТЬ СНОВА</span>
+            </button>
+        </div>
+    </div>
+}
+
+<!-- Settings Modal (outside game-app-container to avoid touch-action:none inheritance) -->
+@if (showSettings)
+{
+    <div class="modal-overlay">
+        <div class="modal-dialog">
+            <div class="modal-header-row">
+                <h2 class="modal-title">НАСТРОЙКИ</h2>
+                <button type="button" class="close-icon-btn" @onclick="() => showSettings = false" title="Закрыть">
+                    <SvgIcon Name="close" />
+                </button>
+            </div>
+            <p class="modal-subtitle">Внешний вид, скины и звуковые эффекты</p>
+
+            <div class="settings-group">
+                <!-- Theme Mode -->
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="theme" />
+                        <span>Тема</span>
+                    </div>
+                    <div class="theme-options">
+                        <button type="button" class="theme-option-btn @(currentTheme == "system" ? "active" : "")"
+                                @onclick='() => ChangeTheme("system")'>
+                            Авто
+                        </button>
+                        <button type="button" class="theme-option-btn @(currentTheme == "dark" ? "active" : "")"
+                                @onclick='() => ChangeTheme("dark")'>
+                            Тёмная
+                        </button>
+                        <button type="button" class="theme-option-btn @(currentTheme == "light" ? "active" : "")"
+                                @onclick='() => ChangeTheme("light")'>
+                            Светлая
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Skin Selector in Settings -->
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="logo" />
+                        <div>
+                            <div>Скин блоков</div>
+                            <div class="settings-row-subtext">@GetSkinName(currentSkin)@(isAutoSkinEnabled ? " • Авто" : "")</div>
+                        </div>
+                    </div>
+                    <button type="button" class="settings-action-btn" @onclick="OpenSkinPickerModal">
+                        <div class="skin-preview-dot skin-@currentSkin" style="width: 22px; height: 22px; flex-shrink: 0; border-radius: 6px;"></div>
+                        <span>Выбрать</span>
+                        <span class="action-btn-arrow">&rsaquo;</span>
+                    </button>
+                </div>
+
+                <!-- Auto Skin Switch -->
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="restart" />
+                        <span>Авто-смена скина</span>
+                    </div>
+                    <div class="toggle-switch @(isAutoSkinEnabled ? "checked" : "")"
+                         @onclick="ToggleAutoSkin">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <!-- Audio & Music Settings Submenu Action -->
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="music" />
+                        <div>
+                            <div>Звук и музыка</div>
+                            <div class="settings-row-subtext">Музыка (@(isBgmEnabled ? $"{(currentBgmTrack == "quiet" ? "Quiet Geometry" : "Aero")}, {bgmVolumePercent}%" : "выкл")), эффекты, голос</div>
+                        </div>
+                    </div>
+                    <button type="button" class="settings-action-btn" @onclick="OpenAudioSettingsModal">
+                        <span>Настроить</span>
+                        <span class="action-btn-arrow">&rsaquo;</span>
+                    </button>
+                </div>
+
+                <!-- Master Mute Quick Switch -->
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="@(isSoundMuted ? "sound-off" : "sound-on")" />
+                        <span>Общий звук (Mute)</span>
+                    </div>
+                    <div class="toggle-switch @(!isSoundMuted ? "checked" : "")"
+                         @onclick="ToggleSound">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <!-- Haptics / Vibration Switch -->
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="zap" />
+                        <span>Виброотклик (Haptic)</span>
+                    </div>
+                    <div class="toggle-switch @(isHapticsEnabled ? "checked" : "")"
+                         @onclick="ToggleHaptics">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <!-- Drag Offset Setting (Finger Offset Slider) -->
+                <div class="settings-row-col">
+                    <div class="settings-slider-header">
+                        <div class="settings-row-label">
+                            <SvgIcon Name="offset" />
+                            <div>
+                                <div>Отступ при переносе</div>
+                                <div class="settings-row-subtext">Высота блока над пальцем</div>
+                            </div>
+                        </div>
+                        <button type="button" class="settings-value-badge @(dragOffsetY == 125 ? "is-default" : "")"
+                                @onclick="() => SetOffsetDirect(125)"
+                                title="Сбросить на значение по умолчанию">
+                            @dragOffsetY px @(dragOffsetY == 125 ? "(Стандарт)" : "")
+                        </button>
+                    </div>
+
+                    <div class="settings-slider-container">
+                        <input type="range"
+                               class="tactile-range-slider"
+                               min="0"
+                               max="100"
+                               step="1"
+                               value="@sliderPercent"
+                               @oninput="OnDragOffsetSliderInput" />
+                        <div class="settings-slider-ticks">
+                            <span class="tick-label @(dragOffsetY == 0 ? "active" : "")" @onclick="() => SetOffsetDirect(0)">0 px</span>
+                            <span class="tick-label tick-center @(dragOffsetY == 125 ? "active" : "")" @onclick="() => SetOffsetDirect(125)">125 px (Центр)</span>
+                            <span class="tick-label @(dragOffsetY == 200 ? "active" : "")" @onclick="() => SetOffsetDirect(200)">200 px (+75)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="primary-btn" @onclick="() => showSettings = false">
+                <span>ГОТОВО</span>
+            </button>
+        </div>
+    </div>
+}
+
+<!-- Dedicated Skin Selection Modal -->
+@if (showSkinPickerModal)
+{
+    <div class="modal-overlay" @onclick="CloseSkinPickerModal">
+        <div class="modal-dialog skin-picker-modal-card" @onclick:stopPropagation="true">
+            <div class="modal-header-row" style="margin-bottom: 8px;">
+                <div class="skin-picker-header-title">
+                    <h2 class="modal-title" style="margin: 0; font-size: 1.22rem;">КОЛЛЕКЦИЯ ТЕМ</h2>
+                    <span class="skins-count-badge">@_availableSkins.Count тем</span>
+                </div>
+                <button type="button" class="close-icon-btn" @onclick="CloseSkinPickerModal" title="Закрыть">
+                    <SvgIcon Name="close" />
+                </button>
+            </div>
+
+            <div class="modal-body skin-picker-body">
+                <!-- Auto-Skin Option Switch -->
+                <div class="skin-auto-banner @(isAutoSkinEnabled ? "active" : "")" @onclick="ToggleAutoSkin">
+                    <div class="skin-auto-info">
+                        <SvgIcon Name="restart" />
+                        <div class="skin-auto-text">
+                            <div class="skin-auto-title">Случайная тема</div>
+                            <div class="skin-auto-sub">Новый скин каждый раунд</div>
+                        </div>
+                    </div>
+                    <div class="toggle-switch @(isAutoSkinEnabled ? "checked" : "")">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <!-- 25 Skins Grid -->
+                <div class="skin-picker-grid">
+                    @foreach (var skin in _availableSkins)
+                    {
+                        string s = skin.Key;
+                        bool isActive = currentSkin == s && !isAutoSkinEnabled;
+                        <button type="button"
+                                class="skin-picker-card @(isActive ? "selected" : "")"
+                                @onclick="() => SelectSkinFromPicker(s)">
+                            <div class="skin-card-preview-wrapper">
+                                <div class="skin-preview-dot skin-card-preview-dot skin-@s"></div>
+                            </div>
+                            <div class="skin-card-info">
+                                <span class="skin-card-name">@skin.Value</span>
+                                @if (isActive)
+                                {
+                                    <span class="skin-card-active-badge">Активен</span>
+                                }
+                            </div>
+                        </button>
+                    }
+                </div>
+            </div>
+
+            <div class="modal-footer" style="padding-top: 12px;">
+                <button type="button" class="primary-btn" style="width: 100%;" @onclick="CloseSkinPickerModal">
+                    <span>ГОТОВО</span>
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- Dedicated Audio & Music Settings Submenu Modal -->
+@if (showAudioSettingsModal)
+{
+    <div class="modal-overlay" @onclick="CloseAudioSettingsModal">
+        <div class="modal-dialog" @onclick:stopPropagation="true">
+            <div class="modal-header-row">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <SvgIcon Name="music" />
+                    <h2 class="modal-title" style="margin: 0; font-size: 1.25rem;">ЗВУК И МУЗЫКА</h2>
+                </div>
+                <button type="button" class="close-icon-btn" @onclick="CloseAudioSettingsModal" title="Закрыть">
+                    <SvgIcon Name="close" />
+                </button>
+            </div>
+            <p class="modal-subtitle">Настройка фона, эффектов фигурок и голоса</p>
+
+            <div class="settings-group">
+                <!-- 1. BGM SECTION -->
+                <div class="audio-subgroup-title">Фоновая музыка</div>
+
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="music" />
+                        <span>Музыка в игре</span>
+                    </div>
+                    <div class="toggle-switch @(isBgmEnabled ? "checked" : "")"
+                         @onclick="ToggleBgm">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <!-- BGM Track Selector (Aero vs Quiet Geometry) -->
+                <div class="settings-row-col">
+                    <div class="settings-slider-header">
+                        <div class="settings-row-label">
+                            <span>Выбор трека</span>
+                        </div>
+                        <span class="settings-value-badge">@(currentBgmTrack == "quiet" ? "Quiet Geometry" : "Aero")</span>
+                    </div>
+                    <div class="audio-segment-control">
+                        <button type="button" class="audio-segment-btn @(currentBgmTrack == "quiet" ? "active" : "")"
+                                @onclick='() => ChangeBgmTrack("quiet")'>
+                            Quiet Geometry
+                        </button>
+                        <button type="button" class="audio-segment-btn @(currentBgmTrack == "aero" ? "active" : "")"
+                                @onclick='() => ChangeBgmTrack("aero")'>
+                            Aero
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BGM Volume Slider -->
+                <div class="settings-row-col">
+                    <div class="settings-slider-header">
+                        <div class="settings-row-label">
+                            <SvgIcon Name="volume" />
+                            <span>Громкость музыки</span>
+                        </div>
+                        <span class="settings-value-badge">@bgmVolumePercent%</span>
+                    </div>
+                    <div class="settings-slider-container">
+                        <input type="range"
+                               class="tactile-range-slider"
+                               min="0"
+                               max="100"
+                               step="5"
+                               value="@bgmVolumePercent"
+                               @oninput="OnBgmVolumeInput" />
+                    </div>
+                </div>
+
+                <!-- 2. SFX SECTION -->
+                <div class="audio-subgroup-title">Звуки фигурок</div>
+
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="zap" />
+                        <span>Эффекты фигурок</span>
+                    </div>
+                    <div class="toggle-switch @(isSfxEnabled ? "checked" : "")"
+                         @onclick="ToggleSfx">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <!-- SFX Volume Slider -->
+                <div class="settings-row-col">
+                    <div class="settings-slider-header">
+                        <div class="settings-row-label">
+                            <SvgIcon Name="volume" />
+                            <span>Громкость эффектов</span>
+                        </div>
+                        <span class="settings-value-badge">@sfxVolumePercent%</span>
+                    </div>
+                    <div class="settings-slider-container">
+                        <input type="range"
+                               class="tactile-range-slider"
+                               min="0"
+                               max="100"
+                               step="5"
+                               value="@sfxVolumePercent"
+                               @oninput="OnSfxVolumeInput" />
+                    </div>
+                </div>
+
+                <!-- 3. VOICE SECTION -->
+                <div class="audio-subgroup-title">Голос комментатора</div>
+
+                <div class="settings-row">
+                    <div class="settings-row-label">
+                        <SvgIcon Name="mic" />
+                        <span>Выкрики при комбо</span>
+                    </div>
+                    <div class="toggle-switch @(isVoiceEnabled ? "checked" : "")"
+                         @onclick="ToggleVoice">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </div>
+
+                <!-- Voice Gender Selector (Male / Female / Mixed) -->
+                <div class="settings-row-col">
+                    <div class="settings-slider-header">
+                        <div class="settings-row-label">
+                            <span>Тип голоса</span>
+                        </div>
+                        <span class="settings-value-badge">
+                            @(currentVoiceGender == "female" ? "Женский" : (currentVoiceGender == "male" ? "Мужской" : "Вперемешку"))
+                        </span>
+                    </div>
+                    <div class="audio-segment-control">
+                        <button type="button" class="audio-segment-btn @(currentVoiceGender == "male" ? "active" : "")"
+                                @onclick='() => ChangeVoiceGender("male")'>
+                            Мужской
+                        </button>
+                        <button type="button" class="audio-segment-btn @(currentVoiceGender == "female" ? "active" : "")"
+                                @onclick='() => ChangeVoiceGender("female")'>
+                            Женский
+                        </button>
+                        <button type="button" class="audio-segment-btn @(currentVoiceGender == "mixed" ? "active" : "")"
+                                @onclick='() => ChangeVoiceGender("mixed")'>
+                            Вперемешку
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Voice Volume Slider -->
+                <div class="settings-row-col">
+                    <div class="settings-slider-header">
+                        <div class="settings-row-label">
+                            <SvgIcon Name="volume" />
+                            <span>Громкость голоса</span>
+                        </div>
+                        <span class="settings-value-badge">@voiceVolumePercent%</span>
+                    </div>
+                    <div class="settings-slider-container">
+                        <input type="range"
+                               class="tactile-range-slider"
+                               min="0"
+                               max="100"
+                               step="5"
+                               value="@voiceVolumePercent"
+                               @oninput="OnVoiceVolumeInput" />
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" class="primary-btn" @onclick="CloseAudioSettingsModal">
+                <span>СОХРАНИТЬ</span>
+            </button>
+        </div>
+    </div>
+}
+
+
+@code {
+    private DotNetObjectReference<Home>? dotNetHelper;
+    private string? selectedPieceId;
+    private bool isSoundMuted = false;
+    private bool isHapticsEnabled = true;
+    private string currentTheme = "system";
+    private string currentSkin = "jewel";
+    private bool isAutoSkinEnabled = true;
+    private int _autoSkinRoundCounter = 0;
+    private const int AutoSkinRoundsInterval = 6;
+    private bool showSettings = false;
+    private bool showSkinPickerModal = false;
+    private bool showAudioSettingsModal = false;
+
+    // Audio Submenu Settings
+    private bool isBgmEnabled = true;
+    private string currentBgmTrack = "aero"; // "aero" | "quiet"
+    private int bgmVolumePercent = 25; // 25% default as requested
+    private bool isSfxEnabled = true;
+    private int sfxVolumePercent = 100;
+    private bool isVoiceEnabled = true;
+    private string currentVoiceGender = "mixed"; // "male" | "female" | "mixed"
+    private int voiceVolumePercent = 100;
+
+    private int dragOffsetY = 125;
+    private int sliderPercent = 50;
+    private int comboDisplayKey = 0;
+    private BoardView? boardViewRef;
+    private ShoutoutType currentShoutout = ShoutoutType.None;
+    private int currentShoutoutBonus = 0;
+    private int currentShoutoutMultiplier = 1;
+    private bool showShoutoutBanner = false;
+    private int shoutoutDisplayKey = 0;
+    private CancellationTokenSource? _shoutoutCts;
+
+    private static readonly Dictionary<string, string> _availableSkins = new()
+    {
+        { "jewel", "Кристалл" },
+        { "wood", "Дерево" },
+        { "candy", "Леденец" },
+        { "cheese", "Сыр" },
+        { "yarn", "Пряжа" },
+        { "neon", "Неон" },
+        { "retro", "Ретро 3D" },
+        { "amber", "Янтарь" },
+        { "metal", "Металл" },
+        { "cyber", "Кибер" },
+        { "magma", "Магма" },
+        { "flat", "Минимум" },
+        { "aurora", "Аврора" },
+        { "obsidian", "Обсидиан" },
+        { "gold", "Золото" },
+        { "matrix", "Матрица" },
+        { "burger", "Бургер" },
+        { "watermelon", "Арбуз" },
+        { "snow", "Снежинки" },
+        { "donut", "Пончик" },
+        { "sushi", "Суши" },
+        { "pizza", "Пицца" },
+        { "avocado", "Авокадо" },
+        { "paw", "Лапка" },
+        { "space", "Космос" },
+        { "dragon", "Дракон" },
+        { "panda", "Панда" },
+        { "cookie", "Печенька" },
+        { "robot", "Робот" },
+        { "cactus", "Кактус" },
+        { "bee", "Пчёлка" },
+        { "ghost", "Призрак" },
+        { "egg", "Яичница" },
+        { "berry", "Ягодка" },
+        { "lemon", "Лимон" },
+        { "strawberry", "Клубника" },
+        { "alien", "НЛО" },
+        { "cat", "Котик" },
+        { "frog", "Лягушонок" },
+        { "pumpkin", "Тыква" },
+        { "orange", "Апельсин" },
+        { "fox", "Лисичка" },
+        { "monster", "Монстрик" },
+        { "seashell", "Ракушка" },
+        { "marshmallow", "Зефирка" },
+        { "rainbow", "Радуга" },
+        { "shark", "Акула" },
+        { "sunflower", "Подсолнух" },
+        { "cupcake", "Капкейк" },
+        { "planet", "Планета" }
+    };
+
+    private static readonly string[] _skinKeys = new[] {
+        "jewel", "wood", "candy", "cheese", "yarn",
+        "neon", "retro", "amber", "metal", "cyber", "magma", "flat",
+        "aurora", "obsidian", "gold", "matrix",
+        "burger", "watermelon", "snow", "donut",
+        "sushi", "pizza", "avocado", "paw", "space",
+        "dragon", "panda", "cookie", "robot", "cactus",
+        "bee", "ghost", "egg", "berry", "lemon",
+        "strawberry", "alien", "cat", "frog", "pumpkin",
+        "orange", "fox", "monster", "seashell", "marshmallow",
+        "rainbow", "shark", "sunflower", "cupcake", "planet"
+    };
+    private static readonly Random _rng = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Load preferences
+        int savedHighScore = Preferences.Get("bb_high_score", 0);
+        currentTheme = Preferences.Get("bb_theme", "system");
+        currentSkin = Preferences.Get("bb_skin", "jewel");
+        isAutoSkinEnabled = Preferences.Get("bb_auto_skin", true);
+        isSoundMuted = Preferences.Get("bb_muted", false);
+        isHapticsEnabled = Preferences.Get("bb_haptics", true);
+
+        // Audio Submenu Preferences
+        isBgmEnabled = Preferences.Get("bb_bgm_enabled", true);
+        currentBgmTrack = Preferences.Get("bb_bgm_track", "aero"); // Default Aero
+        bgmVolumePercent = Preferences.Get("bb_bgm_volume", 25); // Default 25%
+        isSfxEnabled = Preferences.Get("bb_sfx_enabled", true);
+        sfxVolumePercent = Preferences.Get("bb_sfx_volume", 100);
+        isVoiceEnabled = Preferences.Get("bb_voice_enabled", true);
+        currentVoiceGender = Preferences.Get("bb_voice_gender", "mixed");
+        voiceVolumePercent = Preferences.Get("bb_voice_volume", 100);
+
+        dragOffsetY = Preferences.Get("bb_drag_offset", 125);
+        sliderPercent = OffsetToSliderPercent(dragOffsetY);
+
+        Game.OnStateChanged += HandleGameStateChanged;
+        Game.OnGameOver += HandleGameOver;
+        Game.OnLinesCleared += HandleLinesCleared;
+
+        Game.StartNewGame(savedHighScore);
+        await Task.CompletedTask;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            try
+            {
+                dotNetHelper = DotNetObjectReference.Create(this);
+                await JS.InvokeVoidAsync("gameInterop.registerHelper", dotNetHelper);
+                await JS.InvokeVoidAsync("blockBlastAudio.setMuted", isSoundMuted);
+                await JS.InvokeVoidAsync("gameInterop.setFingerOffsetY", dragOffsetY);
+
+                // Apply initial audio settings to audio engine
+                await JS.InvokeVoidAsync("blockBlastAudio.setBgmTrack", currentBgmTrack);
+                await JS.InvokeVoidAsync("blockBlastAudio.setBgmVolume", bgmVolumePercent / 100.0);
+                await JS.InvokeVoidAsync("blockBlastAudio.setBgmEnabled", isBgmEnabled);
+                await JS.InvokeVoidAsync("blockBlastAudio.setSfxEnabled", isSfxEnabled);
+                await JS.InvokeVoidAsync("blockBlastAudio.setSfxVolume", sfxVolumePercent / 100.0);
+                await JS.InvokeVoidAsync("blockBlastAudio.setVoiceEnabled", isVoiceEnabled);
+                await JS.InvokeVoidAsync("blockBlastAudio.setVoiceVolume", voiceVolumePercent / 100.0);
+                await JS.InvokeVoidAsync("blockBlastAudio.setVoiceGender", currentVoiceGender);
+
+                await ApplyThemeAsync(currentTheme);
+                await JS.InvokeVoidAsync("gameInterop.applySkin", currentSkin);
+                await JS.InvokeVoidAsync("gameInterop.dismissPreloader");
+            }
+            catch
+            {
+                // Gracefully handle the case where JS isn't ready yet on first render
+            }
+        }
+    }
+
+    private static int SliderPercentToOffset(int percent)
+    {
+        if (percent <= 50)
+        {
+            return (int)Math.Round((percent / 50.0) * 125.0);
+        }
+        else
+        {
+            return (int)Math.Round(125.0 + ((percent - 50.0) / 50.0) * 75.0);
+        }
+    }
+
+    private static int OffsetToSliderPercent(int offset)
+    {
+        if (offset <= 125)
+        {
+            return (int)Math.Round((Math.Max(0, offset) / 125.0) * 50.0);
+        }
+        else
+        {
+            return (int)Math.Round(50.0 + ((Math.Min(200, offset) - 125.0) / 75.0) * 50.0);
+        }
+    }
+
+    private async Task OnDragOffsetSliderInput(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int percent))
+        {
+            sliderPercent = Math.Clamp(percent, 0, 100);
+            dragOffsetY = SliderPercentToOffset(sliderPercent);
+            Preferences.Set("bb_drag_offset", dragOffsetY);
+            await JS.InvokeVoidAsync("gameInterop.setFingerOffsetY", dragOffsetY);
+        }
+    }
+
+    private async Task SetOffsetDirect(int offset)
+    {
+        dragOffsetY = Math.Clamp(offset, 0, 200);
+        sliderPercent = OffsetToSliderPercent(dragOffsetY);
+        Preferences.Set("bb_drag_offset", dragOffsetY);
+        await JS.InvokeVoidAsync("gameInterop.setFingerOffsetY", dragOffsetY);
+    }
+
+    private async Task ApplyThemeAsync(string theme)
+    {
+        try
+        {
+            currentTheme = theme;
+            Preferences.Set("bb_theme", theme);
+            await JS.InvokeVoidAsync("gameInterop.applyThemeMode", theme);
+
+            if (theme == "system")
+            {
+                var palette = await DynamicTheme.GetDynamicPaletteAsync();
+                if (palette != null)
+                {
+                    await JS.InvokeVoidAsync("gameInterop.setSystemPalette", palette);
+                }
+            }
+        }
+        catch { }
+    }
+
+    private async Task ChangeTheme(string theme)
+    {
+        await ApplyThemeAsync(theme);
+        StateHasChanged();
+    }
+
+    private async Task ChangeSkin(string skin)
+    {
+        currentSkin = skin;
+        isAutoSkinEnabled = false;
+        _autoSkinRoundCounter = 0;
+        Preferences.Set("bb_skin", skin);
+        Preferences.Set("bb_auto_skin", false);
+        try
+        {
+            await JS.InvokeVoidAsync("gameInterop.applySkin", skin, true);
+        }
+        catch { }
+        StateHasChanged();
+    }
+
+    private void OpenSkinPickerModal()
+    {
+        showSkinPickerModal = true;
+    }
+
+    private void CloseSkinPickerModal()
+    {
+        showSkinPickerModal = false;
+    }
+
+    private async Task SelectSkinFromPicker(string skin)
+    {
+        await ChangeSkin(skin);
+    }
+
+    private void OpenAudioSettingsModal()
+    {
+        showAudioSettingsModal = true;
+    }
+
+    private void CloseAudioSettingsModal()
+    {
+        showAudioSettingsModal = false;
+    }
+
+    private async Task ToggleBgm()
+    {
+        isBgmEnabled = !isBgmEnabled;
+        Preferences.Set("bb_bgm_enabled", isBgmEnabled);
+        await JS.InvokeVoidAsync("blockBlastAudio.setBgmEnabled", isBgmEnabled);
+    }
+
+    private async Task ChangeBgmTrack(string track)
+    {
+        currentBgmTrack = track;
+        Preferences.Set("bb_bgm_track", currentBgmTrack);
+        await JS.InvokeVoidAsync("blockBlastAudio.setBgmTrack", currentBgmTrack);
+    }
+
+    private async Task OnBgmVolumeInput(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int val))
+        {
+            bgmVolumePercent = Math.Clamp(val, 0, 100);
+            Preferences.Set("bb_bgm_volume", bgmVolumePercent);
+            await JS.InvokeVoidAsync("blockBlastAudio.setBgmVolume", bgmVolumePercent / 100.0);
+        }
+    }
+
+    private async Task ToggleSfx()
+    {
+        isSfxEnabled = !isSfxEnabled;
+        Preferences.Set("bb_sfx_enabled", isSfxEnabled);
+        await JS.InvokeVoidAsync("blockBlastAudio.setSfxEnabled", isSfxEnabled);
+        if (isSfxEnabled)
+        {
+            await JS.InvokeVoidAsync("blockBlastAudio.playClick");
+        }
+    }
+
+    private async Task OnSfxVolumeInput(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int val))
+        {
+            sfxVolumePercent = Math.Clamp(val, 0, 100);
+            Preferences.Set("bb_sfx_volume", sfxVolumePercent);
+            await JS.InvokeVoidAsync("blockBlastAudio.setSfxVolume", sfxVolumePercent / 100.0);
+        }
+    }
+
+    private async Task ToggleVoice()
+    {
+        isVoiceEnabled = !isVoiceEnabled;
+        Preferences.Set("bb_voice_enabled", isVoiceEnabled);
+        await JS.InvokeVoidAsync("blockBlastAudio.setVoiceEnabled", isVoiceEnabled);
+    }
+
+    private async Task ChangeVoiceGender(string gender)
+    {
+        currentVoiceGender = gender;
+        Preferences.Set("bb_voice_gender", currentVoiceGender);
+        await JS.InvokeVoidAsync("blockBlastAudio.setVoiceGender", currentVoiceGender);
+        // Play sample shoutout for immediate feedback (zero cooldown, instant preview)
+        if (isVoiceEnabled && !isSoundMuted)
+        {
+            await JS.InvokeVoidAsync("blockBlastAudio.previewVoice", currentVoiceGender);
+        }
+    }
+
+    private async Task OnVoiceVolumeInput(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int val))
+        {
+            voiceVolumePercent = Math.Clamp(val, 0, 100);
+            Preferences.Set("bb_voice_volume", voiceVolumePercent);
+            await JS.InvokeVoidAsync("blockBlastAudio.setVoiceVolume", voiceVolumePercent / 100.0);
+        }
+    }
+
+    private static string GetSkinName(string skinKey) =>
+        _availableSkins.TryGetValue(skinKey, out var name) ? name : skinKey;
+
+    private void ToggleAutoSkin()
+    {
+        isAutoSkinEnabled = !isAutoSkinEnabled;
+        Preferences.Set("bb_auto_skin", isAutoSkinEnabled);
+        _autoSkinRoundCounter = 0;
+    }
+
+    private void RotateRandomSkin()
+    {
+        var otherSkins = _skinKeys.Where(k => k != currentSkin).ToArray();
+        currentSkin = otherSkins[_rng.Next(otherSkins.Length)];
+        Preferences.Set("bb_skin", currentSkin);
+        _ = JS.InvokeVoidAsync("gameInterop.applySkin", currentSkin, true);
+    }
+
+    private async Task ToggleSound()
+    {
+        isSoundMuted = !isSoundMuted;
+        Preferences.Set("bb_muted", isSoundMuted);
+        await JS.InvokeVoidAsync("blockBlastAudio.setMuted", isSoundMuted);
+        if (!isSoundMuted)
+        {
+            await JS.InvokeVoidAsync("blockBlastAudio.playClick");
+        }
+    }
+
+    private void ToggleHaptics()
+    {
+        isHapticsEnabled = !isHapticsEnabled;
+        Preferences.Set("bb_haptics", isHapticsEnabled);
+        if (isHapticsEnabled)
+        {
+            HapticService.Click();
+            _ = JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 25);
+        }
+    }
+
+    private async Task RestartGame()
+    {
+        try
+        {
+            selectedPieceId = null;
+            showSettings = false;
+            showShoutoutBanner = false;
+            currentShoutout = ShoutoutType.None;
+            _shoutoutCts?.Cancel();
+            PieceLibrary.ResetPacing();
+
+            try
+            {
+                await JS.InvokeVoidAsync("gameInterop.hideDragGhost");
+                await JS.InvokeVoidAsync("blockBlastAudio.playClick");
+            }
+            catch { }
+
+            if (isHapticsEnabled)
+            {
+                HapticService.Click();
+            }
+
+            if (isAutoSkinEnabled && _autoSkinRoundCounter >= 3)
+            {
+                _autoSkinRoundCounter = 0;
+                RotateRandomSkin();
+            }
+
+            Game.StartNewGame();
+        }
+        catch (Exception)
+        {
+            // Defensive recovery
+            Game.StartNewGame();
+        }
+        finally
+        {
+            StateHasChanged();
+        }
+    }
+
+    private void HandlePieceSelect(GamePiece piece)
+    {
+        if (piece.IsUsed || Game.IsGameOver) return;
+
+        if (selectedPieceId == piece.Id)
+        {
+            selectedPieceId = null;
+            Game.ClearPreview();
+        }
+        else
+        {
+            selectedPieceId = piece.Id;
+            if (isHapticsEnabled) HapticService.Click();
+            _ = JS.InvokeVoidAsync("blockBlastAudio.playPickup");
+        }
+    }
+
+    private async Task HandleBoardCellClick((int row, int col) pos) => await HandleCellClick(pos.row, pos.col);
+
+    private async Task HandleCellClick(int row, int col)
+    {
+        if (string.IsNullOrEmpty(selectedPieceId) || Game.IsGameOver) return;
+
+        var piece = Game.CurrentPieces.FirstOrDefault(p => p.Id == selectedPieceId);
+        if (piece == null || piece.IsUsed) return;
+
+        if (Game.CanPlacePiece(piece, row, col))
+        {
+            var result = Game.PlacePiece(piece, row, col);
+            if (result.Success)
+            {
+                selectedPieceId = null;
+                Game.ClearPreview();
+                await ProcessPlacementOutcome(result);
+            }
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("blockBlastAudio.playInvalid");
+            if (isHapticsEnabled)
+            {
+                HapticService.Heavy();
+                await JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 35);
+            }
+        }
+    }
+
+    private async Task HandlePiecePointerDown(PointerEventArgs e, GamePiece piece)
+    {
+        if (piece.IsUsed || Game.IsGameOver) return;
+
+        selectedPieceId = piece.Id;
+        bool isTouch = e.PointerType == "touch";
+
+        if (isHapticsEnabled) HapticService.Click();
+
+        await JS.InvokeVoidAsync("gameInterop.startDragFromElement", $"slot-{piece.Id}", piece.Id, piece.Rows, piece.Cols, e.ClientX, e.ClientY);
+    }
+
+    [JSInvokable]
+    public Task OnDragHoverCell(string pieceId, int row, int col)
+    {
+        var piece = Game.CurrentPieces.FirstOrDefault(p => p.Id == pieceId);
+        if (piece != null && !piece.IsUsed)
+        {
+            Game.SetPreview(piece, row, col);
+            boardViewRef?.Refresh();
+        }
+        return Task.CompletedTask;
+    }
+
+    [JSInvokable]
+    public Task OnDragLeaveBoard()
+    {
+        Game.ClearPreview();
+        boardViewRef?.Refresh();
+        return Task.CompletedTask;
+    }
+
+    [JSInvokable]
+    public async Task OnDropPieceOnCell(string pieceId, int row, int col)
+    {
+        var piece = Game.CurrentPieces.FirstOrDefault(p => p.Id == pieceId);
+        if (piece != null && !piece.IsUsed)
+        {
+            if (Game.CanPlacePiece(piece, row, col))
+            {
+                var result = Game.PlacePiece(piece, row, col);
+                selectedPieceId = null;
+                Game.ClearPreview();
+                await ProcessPlacementOutcome(result);
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("blockBlastAudio.playInvalid");
+                if (isHapticsEnabled) HapticService.Heavy();
+                Game.ClearPreview();
+            }
+        }
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public Task OnCancelDrag()
+    {
+        Game.ClearPreview();
+        boardViewRef?.Refresh();
+        return Task.CompletedTask;
+    }
+
+    private async Task ProcessPlacementOutcome(PlacementResult result)
+    {
+        // 1. Play place sound and haptics
+        await JS.InvokeVoidAsync("blockBlastAudio.playPlace");
+
+        if (isHapticsEnabled)
+        {
+            if (result.ClearedLinesCount > 0)
+            {
+                HapticService.Heavy();
+                await JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 45);
+            }
+            else
+            {
+                HapticService.Click();
+                await JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 20);
+            }
+        }
+
+        // 2. If lines cleared
+        if (result.ClearedLinesCount > 0)
+        {
+            int totalCells = (result.ClearedRows.Count * 8) + (result.ClearedCols.Count * 8)
+                - (result.ClearedRows.Count * result.ClearedCols.Count);
+
+            await JS.InvokeVoidAsync("blockBlastAudio.playLineClear", totalCells, result.ClearedLinesCount, result.ComboStreak);
+
+            if (isHapticsEnabled)
+            {
+                if (result.ClearedLinesCount >= 3)
+                {
+                    HapticService.Heavy();
+                    _ = JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 65);
+                }
+                else if (result.ClearedLinesCount == 2)
+                {
+                    HapticService.Medium();
+                    _ = JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 40);
+                }
+                else
+                {
+                    HapticService.Click();
+                    _ = JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 25);
+                }
+            }
+
+            comboDisplayKey++;
+            StateHasChanged();
+
+            // Allow blast pop and shockwave animations to play out gorgeously
+            await Task.Delay(340);
+
+            // Finish clearing lines in the game engine (resets cells, spawns new trio, checks game over)
+            bool isBoardClear = Game.FinishLineClearing(result.ClearedRows, result.ClearedCols);
+            if (isBoardClear)
+            {
+                await JS.InvokeVoidAsync("blockBlastAudio.playBoardClear");
+                HapticService.Success();
+                var clearShoutout = (result.Shoutout == ShoutoutType.Insane) ? ShoutoutType.Insane : ShoutoutType.Unbelievable;
+                TriggerShoutout(clearShoutout, result.ShoutoutBonusPoints > 0 ? result.ShoutoutBonusPoints : (clearShoutout == ShoutoutType.Insane ? 1200 : 800) * Math.Max(1, result.ComboStreak), result.ShoutoutMultiplier);
+            }
+            else if (result.Shoutout != ShoutoutType.None)
+            {
+                TriggerShoutout(result.Shoutout, result.ShoutoutBonusPoints, result.ShoutoutMultiplier);
+            }
+            StateHasChanged();
+        }
+        else
+        {
+            // Non-clearing placement: check if it was a lucky / strategic placement
+            if (result.Shoutout != ShoutoutType.None)
+            {
+                TriggerShoutout(result.Shoutout, result.ShoutoutBonusPoints, result.ShoutoutMultiplier);
+            }
+
+            if (Game.ComboStreak > 0)
+            {
+                // Combo grace period renewed on placement
+                comboDisplayKey++;
+            }
+            StateHasChanged();
+        }
+
+        // 3. Update high score in persistent storage
+        if (Game.Score >= Game.HighScore)
+        {
+            Preferences.Set("bb_high_score", Game.HighScore);
+        }
+
+        // 4. If new round trio was spawned and auto-skin is enabled, rotate skin at a comfortable interval!
+        if (isAutoSkinEnabled && Game.CurrentPieces.All(p => !p.IsUsed))
+        {
+            _autoSkinRoundCounter++;
+            if (_autoSkinRoundCounter >= AutoSkinRoundsInterval)
+            {
+                _autoSkinRoundCounter = 0;
+                RotateRandomSkin();
+            }
+        }
+    }
+
+    [JSInvokable]
+    public async Task RestartGameFromJs()
+    {
+        await InvokeAsync(RestartGame);
+    }
+
+    [JSInvokable]
+    public async Task ChangeSkinFromJs(string skin)
+    {
+        await InvokeAsync(() => ChangeSkin(skin));
+    }
+
+    [JSInvokable]
+    public async Task CloseSettingsFromJs()
+    {
+        await InvokeAsync(() =>
+        {
+            showSettings = false;
+            StateHasChanged();
+        });
+    }
+
+    [JSInvokable]
+    public async Task OpenSettingsFromJs()
+    {
+        await InvokeAsync(() =>
+        {
+            showSettings = true;
+            StateHasChanged();
+        });
+    }
+
+    private void HandleGameStateChanged()
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleLinesCleared(PlacementResult result)
+    {
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void HandleGameOver()
+    {
+        _ = JS.InvokeVoidAsync("blockBlastAudio.playGameOver");
+        if (isHapticsEnabled)
+        {
+            HapticService.Heavy();
+            _ = JS.InvokeVoidAsync("gameInterop.vibrateHaptic", 60);
+        }
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void TriggerShoutout(ShoutoutType type, int bonus, int multiplier)
+    {
+        if (type == ShoutoutType.None) return;
+
+        currentShoutout = type;
+        currentShoutoutBonus = bonus;
+        currentShoutoutMultiplier = multiplier;
+        showShoutoutBanner = true;
+        shoutoutDisplayKey++;
+
+        // Trigger voice shoutout audio in JS (with built-in anti-spam duplicate protection)
+        string word = type.ToString().ToLower();
+        _ = JS.InvokeVoidAsync("blockBlastAudio.playShoutout", word);
+
+        _shoutoutCts?.Cancel();
+        _shoutoutCts?.Dispose();
+        _shoutoutCts = new CancellationTokenSource();
+        var token = _shoutoutCts.Token;
+
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await Task.Delay(2200, token);
+                if (!token.IsCancellationRequested)
+                {
+                    showShoutoutBanner = false;
+                    await InvokeAsync(StateHasChanged);
+                }
+            }
+            catch (OperationCanceledException) { }
+        });
+    }
+
+    private static string GetShoutoutTitle(ShoutoutType type) => type switch
+    {
+        ShoutoutType.Good => "GOOD!",
+        ShoutoutType.Great => "GREAT!",
+        ShoutoutType.Impressive => "IMPRESSIVE!",
+        ShoutoutType.Excellent => "EXCELLENT!",
+        ShoutoutType.Amazing => "AMAZING!",
+        ShoutoutType.Unbelievable => "UNBELIEVABLE!",
+        ShoutoutType.Insane => "INSANE!",
+        _ => string.Empty
+    };
+
+    public void Dispose()
+    {
+        Game.OnStateChanged -= HandleGameStateChanged;
+        Game.OnGameOver -= HandleGameOver;
+        Game.OnLinesCleared -= HandleLinesCleared;
+        _shoutoutCts?.Cancel();
+        _shoutoutCts?.Dispose();
+        dotNetHelper?.Dispose();
+    }
+}

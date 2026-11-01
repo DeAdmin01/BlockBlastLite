@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Block Blast Lite</title>
+    <base href="/" />
+    <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="BlockBlastLite.styles.css" />
+    <link rel="icon" href="data:,">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #090D16;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        #app {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Fixed Fullscreen Preloader Overlay (Zero-Flicker, High FPS, 2+ Secs) */
+        .app-preloader-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            background: radial-gradient(circle at 50% 38%, #161e38 0%, #090d16 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            user-select: none;
+            -webkit-user-select: none;
+            transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.55s ease;
+            will-change: opacity, transform, filter;
+            overflow: hidden;
+        }
+
+        .app-preloader-overlay.dismissed {
+            opacity: 0;
+            transform: scale(1.06);
+            filter: blur(5px);
+            pointer-events: none;
+        }
+
+        /* Ambient Glow Pulse */
+        .preloader-ambient-glow {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.25) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: preloaderAmbientPulse 3s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes preloaderAmbientPulse {
+            0% { transform: scale(0.85); opacity: 0.6; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .preloader-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            width: 100%;
+            max-width: 320px;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 2x2 Animated 3D Jewel Blocks Cluster */
+        .preloader-cube-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 48px);
+            grid-template-rows: repeat(2, 48px);
+            gap: 10px;
+            filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.6));
+        }
+
+        .preloader-block {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 
+                inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.9), 
+                inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.35);
+            animation: preloaderBounce 1.5s cubic-bezier(0.34, 1.45, 0.64, 1) infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .preloader-block::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transform: skewX(-20deg);
+            animation: preloaderShine 2.4s ease-in-out infinite;
+        }
+
+        .pb-1 {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            animation-delay: 0s;
+            box-shadow: inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.9), 0 6px 18px rgba(2, 132, 199, 0.45);
+        }
+        .pb-2 {
+            background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+            animation-delay: 0.18s;
+            box-shadow: inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.9), 0 6px 18px rgba(236, 72, 153, 0.45);
+        }
+        .pb-3 {
+            background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%);
+            animation-delay: 0.36s;
+            box-shadow: inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.9), 0 6px 18px rgba(22, 163, 74, 0.45);
+        }
+        .pb-4 {
+            background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+            animation-delay: 0.54s;
+            box-shadow: inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.9), 0 6px 18px rgba(245, 158, 11, 0.45);
+        }
+
+        @keyframes preloaderBounce {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+            }
+            35% {
+                transform: scale(1.16) translateY(-6px);
+                filter: brightness(1.2);
+            }
+            60% {
+                transform: scale(0.96) translateY(1px);
+            }
+        }
+
+        @keyframes preloaderShine {
+            0%, 40% { left: -100%; }
+            70%, 100% { left: 200%; }
+        }
+
+        /* Title Typography */
+        .preloader-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .preloader-title {
+            font-size: 1.95rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            background: linear-gradient(180deg, #ffffff 0%, #fef08a 45%, #f59e0b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .preloader-badge {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #38bdf8;
+            background: rgba(2, 132, 199, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.5);
+            padding: 3px 14px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+        }
+
+        .badge-sparkle {
+            font-size: 0.62rem;
+            color: #fde047;
+        }
+
+        /* Animated Progress Bar + Information */
+        .preloader-progress-wrap {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .preloader-bar-track {
+            width: 220px;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .preloader-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #38bdf8 0%, #ec4899 55%, #f59e0b 100%);
+            border-radius: 999px;
+            transition: width 0.08s linear;
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.7);
+        }
+
+        .preloader-info-col {
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            text-align: center;
+        }
+
+        .preloader-percent {
+            font-size: 0.92rem;
+            font-weight: 850;
+            color: #38bdf8;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.02em;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .preloader-status {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.65);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 220px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="status-bar-safe-area"></div>
+
+    <!-- Dedicated Fixed Preloader Overlay -->
+    <div id="app-preloader" class="app-preloader-overlay">
+        <div class="preloader-ambient-glow"></div>
+        <div class="preloader-screen">
+            <div class="preloader-cube-grid">
+                <div class="preloader-block pb-1"></div>
+                <div class="preloader-block pb-2"></div>
+                <div class="preloader-block pb-3"></div>
+                <div class="preloader-block pb-4"></div>
+            </div>
+
+            <div class="preloader-brand">
+                <h1 class="preloader-title">BLOCK BLAST</h1>
+                <div class="preloader-badge">
+                    <span class="badge-sparkle">✦</span>
+                    <span>LITE EDITION</span>
+                    <span class="badge-sparkle">✦</span>
+                </div>
+            </div>
+
+            <div class="preloader-progress-wrap">
+                <div class="preloader-bar-track">
+                    <div id="preloader-fill" class="preloader-bar-fill"></div>
+                </div>
+                <div class="preloader-info-col">
+                    <span id="preloader-percent" class="preloader-percent">0%</span>
+                    <span id="preloader-status" class="preloader-status">Загрузка 50 сочных тем...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app"></div>
+
+    <div id="blazor-error-ui" data-nosnippet>
+        An unhandled error has occurred.
+        <a href="." class="reload">Reload</a>
+        <span class="dismiss">&#x2715;</span>
+    </div>
+
+    <script src="js/soundEffects.js"></script>
+    <script src="js/gameInterop.js"></script>
+    <script src="_framework/blazor.webview.js" autostart="false"></script>
+
+</body>
+
+</html>

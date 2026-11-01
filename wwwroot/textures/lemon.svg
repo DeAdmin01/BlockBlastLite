@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Zesty Lemon Yellow Rind Gradient -->
+    <linearGradient id="lemonRind" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#facc15"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+
+    <!-- Translucent Juicy Pulp Segment Gradient -->
+    <radialGradient id="pulpGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#fef08a"/>
+      <stop offset="85%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </radialGradient>
+
+    <!-- Ice Cube Gradient -->
+    <linearGradient id="iceCube" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#e0f2fe" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#bae6fd" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Outer Bright Lemon Zest Rind (Full-bleed block) -->
+  <rect width="128" height="128" rx="16" fill="url(#lemonRind)"/>
+
+  <!-- 2. Crisp White Pith Ring -->
+  <circle cx="64" cy="64" r="54" fill="#ffffff" stroke="#fef9c3" stroke-width="2"/>
+
+  <!-- 3. CITRUS PULP SLICES (Triangular radiating wedges) -->
+  <!-- Wedge 1 (Top) -->
+  <path d="M 64,64 L 56,18 C 61,16 67,16 72,18 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+  <!-- Wedge 2 (Top-Right) -->
+  <path d="M 64,64 L 84,24 C 91,28 97,34 101,41 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+  <!-- Wedge 3 (Right) -->
+  <path d="M 64,64 L 106,52 C 108,58 108,68 106,74 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+  <!-- Wedge 4 (Bottom-Right) -->
+  <path d="M 64,64 L 98,88 C 93,95 86,101 78,104 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+  <!-- Wedge 5 (Bottom) -->
+  <path d="M 64,64 L 56,108 C 61,110 67,110 72,108 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+  <!-- Wedge 6 (Bottom-Left) -->
+  <path d="M 64,64 L 28,98 C 22,91 18,84 16,76 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+  <!-- Wedge 7 (Left) -->
+  <path d="M 64,64 L 16,52 C 18,44 22,36 28,30 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+  <!-- Wedge 8 (Top-Left) -->
+  <path d="M 64,64 L 42,22 C 48,18 54,16 58,16 Z" fill="url(#pulpGrad)" stroke="#ca8a04" stroke-width="1"/>
+
+  <!-- Pulp Vesicle Micro-Drops inside segments -->
+  <ellipse cx="64" cy="36" rx="2.5" ry="5" fill="#ffffff" opacity="0.8"/>
+  <ellipse cx="86" cy="45" rx="2.5" ry="5" transform="rotate(45 86 45)" fill="#ffffff" opacity="0.8"/>
+  <ellipse cx="90" cy="64" rx="5" ry="2.5" fill="#ffffff" opacity="0.8"/>
+  <ellipse cx="80" cy="84" rx="2.5" ry="5" transform="rotate(-45 80 84)" fill="#ffffff" opacity="0.8"/>
+  <ellipse cx="42" cy="80" rx="2.5" ry="5" transform="rotate(45 42 80)" fill="#ffffff" opacity="0.8"/>
+  <ellipse cx="38" cy="64" rx="5" ry="2.5" fill="#ffffff" opacity="0.8"/>
+  <ellipse cx="45" cy="44" rx="2.5" ry="5" transform="rotate(-45 45 44)" fill="#ffffff" opacity="0.8"/>
+
+  <!-- 4. Pure White Star Center Core -->
+  <circle cx="64" cy="64" r="7" fill="#ffffff" stroke="#fef08a" stroke-width="1"/>
+
+  <!-- 5. Fresh Mint Leaf on top-left -->
+  <path d="M 22,22 C 14,8 32,8 38,18 C 34,26 26,26 22,22 Z" fill="#22c55e" stroke="#15803d" stroke-width="1.2"/>
+  <line x1="22" y1="22" x2="33" y2="13" stroke="#86efac" stroke-width="1"/>
+
+  <!-- 6. Cute Translucent Ice Cube with Specular Reflection (Top Right) -->
+  <g transform="translate(86, 26)">
+    <rect x="0" y="0" width="22" height="22" rx="5" fill="url(#iceCube)" stroke="#e0f2fe" stroke-width="1.5"/>
+    <path d="M 4,4 L 18,4 L 18,18" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.9" stroke-linecap="round"/>
+  </g>
+
+  <!-- Specular Citrus Juice Sparkle -->
+  <path d="M 64,52 L 66,46 L 68,52 L 74,54 L 68,56 L 66,62 L 64,56 L 58,54 Z" fill="#ffffff" opacity="0.95"/>
+  <circle cx="106" cy="106" r="2.5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="20" cy="106" r="2" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Outer Zest Cartoon Border -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="15" fill="none" stroke="#ca8a04" stroke-width="3" opacity="0.85"/>
+</svg>

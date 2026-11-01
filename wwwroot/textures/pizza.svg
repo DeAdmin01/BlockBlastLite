@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Baked Crust Gradient -->
+    <linearGradient id="crustGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fed7aa"/>
+      <stop offset="40%" stop-color="#fba857"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+
+    <!-- Melted Mozzarella Cheese Gradient -->
+    <radialGradient id="cheeseGrad" cx="45%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="35%" stop-color="#facc15"/>
+      <stop offset="85%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </radialGradient>
+
+    <!-- Pepperoni Gradient -->
+    <radialGradient id="pepGrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#f87171"/>
+      <stop offset="40%" stop-color="#dc2626"/>
+      <stop offset="85%" stop-color="#991b1b"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </radialGradient>
+
+    <!-- Basil Leaf Gradient -->
+    <linearGradient id="basilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Baked Crust Base (Edge to edge) -->
+  <rect width="128" height="128" rx="16" fill="url(#crustGrad)"/>
+
+  <!-- Crust puffy border ridges -->
+  <path d="M 0,0 L 128,0 L 128,22 C 96,16 32,16 0,22 Z" fill="#b45309" opacity="0.35"/>
+  <circle cx="24" cy="12" r="3.5" fill="#78350f" opacity="0.4"/>
+  <circle cx="68" cy="8" r="4.5" fill="#78350f" opacity="0.4"/>
+  <circle cx="108" cy="12" r="3" fill="#78350f" opacity="0.4"/>
+
+  <!-- 2. Melted Mozzarella Cheese Field -->
+  <rect x="8" y="8" width="112" height="112" rx="14" fill="url(#cheeseGrad)"/>
+  <!-- Tomato sauce peek-throughs around border -->
+  <path d="M 8,24 Q 24,14 44,20 Q 64,12 88,18 Q 112,14 120,28" stroke="#dc2626" stroke-width="3" fill="none" opacity="0.8"/>
+  <path d="M 120,44 Q 112,64 120,84" stroke="#dc2626" stroke-width="3" fill="none" opacity="0.8"/>
+
+  <!-- Melted cheese glossy puddles & bubbles -->
+  <ellipse cx="42" cy="46" rx="18" ry="12" fill="#fef9c3" opacity="0.6"/>
+  <ellipse cx="88" cy="82" rx="16" ry="10" fill="#fef9c3" opacity="0.6"/>
+  <circle cx="66" cy="38" r="3" fill="#d97706" opacity="0.6"/>
+  <circle cx="28" cy="82" r="2.5" fill="#d97706" opacity="0.6"/>
+  <circle cx="98" cy="52" r="3.5" fill="#d97706" opacity="0.6"/>
+
+  <!-- 3. Savory Pepperoni Slices (Cartoon circular slices with fat spots) -->
+  <!-- Pepperoni 1 (Top Left) -->
+  <g transform="translate(32, 34)">
+    <circle cx="0" cy="0" r="17" fill="url(#pepGrad)" stroke="#7f1d1d" stroke-width="2"/>
+    <circle cx="-5" cy="-5" r="2.2" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="4" cy="-4" r="1.8" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="-2" cy="5" r="2" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="6" cy="4" r="1.5" fill="#fee2e2" opacity="0.8"/>
+    <!-- Curled edge specular highlight -->
+    <path d="M -12,-9 A 15 15 0 0 1 10,-9" stroke="#fca5a5" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Pepperoni 2 (Bottom Right) -->
+  <g transform="translate(92, 86)">
+    <circle cx="0" cy="0" r="18" fill="url(#pepGrad)" stroke="#7f1d1d" stroke-width="2"/>
+    <circle cx="-6" cy="-4" r="2.4" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="5" cy="-6" r="1.8" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="-3" cy="6" r="2" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="6" cy="5" r="1.8" fill="#fee2e2" opacity="0.8"/>
+    <path d="M -13,-10 A 16 16 0 0 1 11,-10" stroke="#fca5a5" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Pepperoni 3 (Center / Right Half) -->
+  <g transform="translate(86, 36)">
+    <circle cx="0" cy="0" r="15" fill="url(#pepGrad)" stroke="#7f1d1d" stroke-width="2"/>
+    <circle cx="-4" cy="-3" r="2" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="3" cy="-4" r="1.6" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="2" cy="4" r="1.8" fill="#fee2e2" opacity="0.8"/>
+    <path d="M -10,-8 A 13 13 0 0 1 9,-8" stroke="#fca5a5" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Pepperoni 4 (Bottom Left) -->
+  <g transform="translate(42, 92)">
+    <circle cx="0" cy="0" r="16" fill="url(#pepGrad)" stroke="#7f1d1d" stroke-width="2"/>
+    <circle cx="-5" cy="-4" r="2.2" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="4" cy="-3" r="1.7" fill="#fee2e2" opacity="0.8"/>
+    <circle cx="0" cy="5" r="1.9" fill="#fee2e2" opacity="0.8"/>
+    <path d="M -11,-9 A 14 14 0 0 1 10,-9" stroke="#fca5a5" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- 4. Fresh Basil Leaves -->
+  <!-- Basil Leaf 1 (Center) -->
+  <path d="M 64,62 C 54,54 54,72 64,76 C 74,72 74,54 64,62 Z" fill="url(#basilGrad)" stroke="#14532d" stroke-width="1.2" transform="rotate(-25 64 66)"/>
+  <line x1="64" y1="58" x2="64" y2="73" stroke="#86efac" stroke-width="1" stroke-linecap="round" transform="rotate(-25 64 66)"/>
+
+  <!-- Basil Leaf 2 (Upper right) -->
+  <path d="M 62,32 C 56,26 56,38 62,42 C 68,38 68,26 62,32 Z" fill="url(#basilGrad)" stroke="#14532d" stroke-width="1" transform="rotate(35 62 35)"/>
+
+  <!-- Basil Leaf 3 (Bottom) -->
+  <path d="M 72,96 C 66,90 66,102 72,106 C 78,102 78,90 72,96 Z" fill="url(#basilGrad)" stroke="#14532d" stroke-width="1" transform="rotate(-15 72 98)"/>
+
+  <!-- Specular cheese glints -->
+  <circle cx="56" cy="52" r="2.2" fill="#ffffff"/>
+  <circle cx="74" cy="74" r="2.5" fill="#ffffff"/>
+  <circle cx="22" cy="62" r="2" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Outer Cartoon Border -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="15" fill="none" stroke="#78350f" stroke-width="3" opacity="0.85"/>
+</svg>

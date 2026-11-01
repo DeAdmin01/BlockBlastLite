@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Deep Space Nebula Gradient -->
+    <radialGradient id="nebulaGrad" cx="60%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="35%" stop-color="#a855f7" stop-opacity="0.25"/>
+      <stop offset="70%" stop-color="#1e1b4b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#020617" stop-opacity="0.9"/>
+    </radialGradient>
+
+    <!-- Saturn Planet Body Gradient -->
+    <linearGradient id="saturnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="40%" stop-color="#f59e0b"/>
+      <stop offset="80%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#78350f"/>
+    </linearGradient>
+
+    <!-- Saturn Ring Gradient -->
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef08a" stop-opacity="0.2"/>
+      <stop offset="25%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#facc15"/>
+      <stop offset="75%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <!-- Moon Gradient -->
+    <radialGradient id="moonGrad" cx="35%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#64748b"/>
+    </radialGradient>
+
+    <filter id="starGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Deep Cosmic Ambient Overlay -->
+  <rect width="128" height="128" rx="16" fill="url(#nebulaGrad)"/>
+
+  <!-- Shooting Star Trail (Upper Left to Lower Right) -->
+  <path d="M 12,18 L 48,26" stroke="url(#ringGrad)" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+  <circle cx="48" cy="26" r="3" fill="#ffffff" filter="url(#starGlow)"/>
+
+  <!-- Secondary subtle comet streak -->
+  <path d="M 80,110 L 114,94" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="80" cy="110" r="2.2" fill="#ffffff"/>
+
+  <!-- SATURN PLANET WITH RINGS (Centered in the upper-right) -->
+  <g transform="translate(76, 68)">
+    <!-- Back of the Ring (Behind planet) -->
+    <ellipse cx="0" cy="0" rx="42" ry="14" transform="rotate(-26)" fill="none" stroke="url(#ringGrad)" stroke-width="7" opacity="0.6"/>
+    <ellipse cx="0" cy="0" rx="36" ry="11" transform="rotate(-26)" fill="none" stroke="#fde047" stroke-width="2" opacity="0.8"/>
+
+    <!-- Planet Sphere -->
+    <circle cx="0" cy="0" r="22" fill="url(#saturnGrad)" stroke="#b45309" stroke-width="1.5"/>
+
+    <!-- Planet atmospheric banding lines -->
+    <path d="M -21,-5 C -10,-1 10,-1 21,-5" stroke="#fed7aa" stroke-width="2.2" fill="none" opacity="0.75" stroke-linecap="round"/>
+    <path d="M -22,2 C -10,6 10,6 22,2" stroke="#b45309" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+    <path d="M -18,9 C -8,12 8,12 18,9" stroke="#fed7aa" stroke-width="1.8" fill="none" opacity="0.7" stroke-linecap="round"/>
+
+    <!-- Front of the Ring (In front of planet, clipped) -->
+    <path d="M -38,18 C -22,29 18,14 38,-3" transform="rotate(-26)" stroke="url(#ringGrad)" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M -32,14 C -18,24 14,11 32,-2" transform="rotate(-26)" stroke="#fde047" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+    <!-- Specular highlight on planet dome -->
+    <ellipse cx="-8" cy="-12" rx="7" ry="4" transform="rotate(-20 -8 -12)" fill="#ffffff" opacity="0.6"/>
+  </g>
+
+  <!-- CARTOON MOON (Upper Left) -->
+  <g transform="translate(28, 42)">
+    <circle cx="0" cy="0" r="14" fill="url(#moonGrad)" stroke="#475569" stroke-width="1.5"/>
+    <!-- Moon Craters -->
+    <circle cx="-3" cy="-4" r="3.2" fill="#94a3b8" opacity="0.7"/>
+    <circle cx="-4" cy="-5" r="2.8" fill="#64748b" opacity="0.5"/>
+    <circle cx="4" cy="2" r="2.2" fill="#94a3b8" opacity="0.7"/>
+    <circle cx="-1" cy="6" r="1.8" fill="#94a3b8" opacity="0.7"/>
+    <!-- Moon white glint -->
+    <ellipse cx="-5" cy="-7" rx="3.5" ry="2" transform="rotate(-25 -5 -7)" fill="#ffffff" opacity="0.8"/>
+  </g>
+
+  <!-- SPARKLING 4-POINT TWINKLE STARS -->
+  <!-- Star 1 (Top Center) -->
+  <g transform="translate(62, 18)" filter="url(#starGlow)">
+    <path d="M 0,-7 Q 0,0 7,0 Q 0,0 0,7 Q 0,0 -7,0 Q 0,0 0,-7 Z" fill="#ffffff"/>
+  </g>
+
+  <!-- Star 2 (Bottom Left) -->
+  <g transform="translate(24, 96)" filter="url(#starGlow)">
+    <path d="M 0,-6 Q 0,0 6,0 Q 0,0 0,6 Q 0,0 -6,0 Q 0,0 0,-6 Z" fill="#fde047"/>
+  </g>
+
+  <!-- Star 3 (Right Edge) -->
+  <g transform="translate(112, 42)">
+    <path d="M 0,-5 Q 0,0 5,0 Q 0,0 0,5 Q 0,0 -5,0 Q 0,0 0,-5 Z" fill="#ffffff" opacity="0.9"/>
+  </g>
+
+  <!-- Micro cosmic dust particles -->
+  <circle cx="16" cy="70" r="1.5" fill="#38bdf8" opacity="0.8"/>
+  <circle cx="42" cy="78" r="1.2" fill="#c084fc" opacity="0.8"/>
+  <circle cx="118" cy="112" r="1.5" fill="#fde047" opacity="0.8"/>
+  <circle cx="98" cy="18" r="1.2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="86" cy="118" r="1.5" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Outer Neon Star-Border -->
+  <rect x="2" y="2" width="124" height="124" rx="14" fill="none" stroke="#a855f7" stroke-width="1.8" opacity="0.5"/>
+</svg>

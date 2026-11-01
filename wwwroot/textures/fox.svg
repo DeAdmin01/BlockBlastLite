@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="foxFur" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="60%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <linearGradient id="earTip" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#292524"/>
+      <stop offset="100%" stop-color="#1c1917"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fox Body Orange Base -->
+  <rect width="128" height="128" rx="20" fill="url(#foxFur)" stroke="#9a3412" stroke-width="2"/>
+
+  <!-- Fox Pointy Ears -->
+  <polygon points="14,46 32,8 56,38" fill="url(#foxFur)" stroke="#9a3412" stroke-width="2"/>
+  <polygon points="114,46 96,8 72,38" fill="url(#foxFur)" stroke="#9a3412" stroke-width="2"/>
+
+  <!-- Dark Ear Tips -->
+  <polygon points="23,26 32,8 44,24" fill="url(#earTip)"/>
+  <polygon points="105,26 96,8 84,24" fill="url(#earTip)"/>
+
+  <!-- Inner Ear White Fluff -->
+  <polygon points="26,42 34,22 48,38" fill="#fafaf9"/>
+  <polygon points="102,42 94,22 80,38" fill="#fafaf9"/>
+
+  <!-- White Cheek / Muzzle Fluff -->
+  <path d="M 64 68 C 50 68, 20 62, 10 78 C 14 100, 36 120, 64 120 C 92 120, 114 100, 118 78 C 108 62, 78 68, 64 68 Z"
+        fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- Cute Sleepy / Happy Curved Eyes -->
+  <path d="M 32 66 Q 44 54 54 66" stroke="#431407" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M 74 66 Q 84 54 96 66" stroke="#431407" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Black Button Nose -->
+  <ellipse cx="64" cy="86" rx="6.5" ry="5" fill="#1c1917"/>
+  <circle cx="62" cy="84" r="1.5" fill="#ffffff"/>
+
+  <!-- Cute Mouth Line -->
+  <path d="M 64 91 L 64 97 M 58 97 Q 64 102 70 97" stroke="#431407" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Whiskers -->
+  <line x1="22" y1="84" x2="38" y2="86" stroke="#78350f" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="20" y1="92" x2="38" y2="92" stroke="#78350f" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="106" y1="84" x2="90" y2="86" stroke="#78350f" stroke-width="1.8" stroke-linecap="round"/>
+  <line x1="108" y1="92" x2="90" y2="92" stroke="#78350f" stroke-width="1.8" stroke-linecap="round"/>
+</svg>

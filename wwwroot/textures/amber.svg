@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Warm amber caustic glow -->
+    <radialGradient id="amberDome" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="35%" stop-color="#ffe082" stop-opacity="0.3"/>
+      <stop offset="70%" stop-color="#ffb300" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#4e2600" stop-opacity="0.45"/>
+    </radialGradient>
+
+    <!-- Translucent amber micro-bubble with internal refraction -->
+    <radialGradient id="amberBubble" cx="30%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#ffecb3" stop-opacity="0.6"/>
+      <stop offset="75%" stop-color="#ff8f00" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#3e1b00" stop-opacity="0.6"/>
+    </radialGradient>
+
+    <!-- Caustic sun ray -->
+    <linearGradient id="causticGlint" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#ffe082" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Amber Convex Dome Base -->
+  <rect width="128" height="128" rx="14" fill="url(#amberDome)"/>
+
+  <!-- Golden Caustic Swirls (Natural Resin Flow) -->
+  <path d="M12,30 C45,15 80,45 116,25" fill="none" stroke="#ffe082" stroke-width="4.5" opacity="0.35" stroke-linecap="round"/>
+  <path d="M18,50 C55,75 90,40 120,65" fill="none" stroke="#ffd54f" stroke-width="3" opacity="0.25" stroke-linecap="round"/>
+  <path d="M10,85 C40,65 85,95 118,80" fill="none" stroke="#ffe082" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+
+  <!-- Specular Top-Left Curved Glint -->
+  <path d="M22,14 C16,14 14,16 14,22 C14,48 18,72 14,96" fill="none" stroke="url(#causticGlint)" stroke-width="3.5" stroke-linecap="round"/>
+  <ellipse cx="38" cy="26" rx="18" ry="7" transform="rotate(-25 38 26)" fill="#ffffff" opacity="0.55"/>
+
+  <!-- Ancient Luminous Bubbles & Micro-inclusions -->
+  <circle cx="86" cy="42" r="7.5" fill="url(#amberBubble)"/>
+  <circle cx="86" cy="42" r="7.5" fill="none" stroke="#fff8e1" stroke-width="0.8" opacity="0.7"/>
+
+  <circle cx="48" cy="74" r="5" fill="url(#amberBubble)"/>
+  <circle cx="48" cy="74" r="5" fill="none" stroke="#fff8e1" stroke-width="0.7" opacity="0.7"/>
+
+  <circle cx="95" cy="85" r="9" fill="url(#amberBubble)"/>
+  <circle cx="95" cy="85" r="9" fill="none" stroke="#fff8e1" stroke-width="1" opacity="0.7"/>
+
+  <circle cx="34" cy="98" r="3.5" fill="url(#amberBubble)"/>
+  <circle cx="72" cy="96" r="3" fill="url(#amberBubble)"/>
+  <circle cx="30" cy="44" r="2.5" fill="url(#amberBubble)"/>
+
+  <!-- Golden Sun Star Glint -->
+  <path d="M38,26 L40,32 L46,34 L40,36 L38,42 L36,36 L30,34 L36,32 Z" fill="#ffffff" opacity="0.85"/>
+</svg>

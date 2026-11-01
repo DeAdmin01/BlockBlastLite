@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Outer Sci-Fi Chamfered Frame -->
+  <polygon points="16,0 112,0 128,16 128,112 112,128 16,128 0,112 0,16" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  <polygon points="20,6 108,6 122,20 122,108 108,122 20,122 6,108 6,20" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+
+  <!-- Corner Tech Chevrons -->
+  <path d="M4,18 L18,4 M18,4 L28,4 M4,18 L4,28" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
+  <path d="M124,18 L110,4 M110,4 L100,4 M124,18 L124,28" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
+  <path d="M4,110 L18,124 M18,124 L28,124 M4,110 L4,100" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
+  <path d="M124,110 L110,124 M110,124 L100,124 M124,110 L124,100" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.8"/>
+
+  <!-- Glowing Bus Circuit Traces (Layered vector glow) -->
+  <path d="M64,6 L64,36 M64,92 L64,122 M6,64 L36,64 M92,64 L122,64" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.2"/>
+  <path d="M64,6 L64,36 M64,92 L64,122 M6,64 L36,64 M92,64 L122,64" fill="none" stroke="#ffffff" stroke-width="2.2" opacity="0.9"/>
+  <path d="M22,22 L42,42 M106,22 L86,42 M22,106 L42,86 M106,106 L86,86" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+
+  <!-- Micro-SMD Contact Pads -->
+  <circle cx="64" cy="24" r="3" fill="#ffffff" opacity="0.85"/>
+  <circle cx="64" cy="104" r="3" fill="#ffffff" opacity="0.85"/>
+  <circle cx="24" cy="64" r="3" fill="#ffffff" opacity="0.85"/>
+  <circle cx="104" cy="64" r="3" fill="#ffffff" opacity="0.85"/>
+
+  <circle cx="36" cy="36" r="2.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="92" cy="36" r="2.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="36" cy="92" r="2.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="92" cy="92" r="2.5" fill="#ffffff" opacity="0.7"/>
+
+  <!-- Central Quantum Energy Core (Hexagonal) -->
+  <polygon points="64,40 84,52 84,76 64,88 44,76 44,52" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.18"/>
+  <polygon points="64,40 84,52 84,76 64,88 44,76 44,52" fill="#ffffff" opacity="0.1" stroke="#ffffff" stroke-width="2.5"/>
+  <polygon points="64,48 76,56 76,72 64,80 52,72 52,56" fill="#ffffff" opacity="0.25"/>
+
+  <!-- Glowing Core Nucleus -->
+  <circle cx="64" cy="64" r="10" fill="#ffffff" opacity="0.25"/>
+  <circle cx="64" cy="64" r="6" fill="#ffffff"/>
+  <circle cx="64" cy="64" r="3" fill="#000000"/>
+</svg>

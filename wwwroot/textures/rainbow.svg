@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="60%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky Blue Base Card -->
+  <rect width="128" height="128" rx="20" fill="url(#skyGrad)" stroke="#0284c7" stroke-width="2"/>
+
+  <!-- Rainbow Arcs (Centered radiating concentric stripes) -->
+  <g fill="none" stroke-width="7" stroke-linecap="round">
+    <!-- Red/Pink -->
+    <path d="M 18 90 A 46 46 0 0 1 110 90" stroke="#f43f5e"/>
+    <!-- Orange -->
+    <path d="M 25 90 A 39 39 0 0 1 103 90" stroke="#fb923c"/>
+    <!-- Yellow -->
+    <path d="M 32 90 A 32 32 0 0 1 96 90" stroke="#fde047"/>
+    <!-- Green -->
+    <path d="M 39 90 A 25 25 0 0 1 89 90" stroke="#4ade80"/>
+    <!-- Cyan -->
+    <path d="M 46 90 A 18 18 0 0 1 82 90" stroke="#38bdf8"/>
+    <!-- Purple -->
+    <path d="M 53 90 A 11 11 0 0 1 75 90" stroke="#c084fc"/>
+  </g>
+
+  <!-- Fluffy Cloud Left -->
+  <g fill="#ffffff">
+    <circle cx="24" cy="98" r="14"/>
+    <circle cx="36" cy="90" r="16"/>
+    <circle cx="48" cy="96" r="14"/>
+    <rect x="10" y="94" width="48" height="18" rx="6"/>
+  </g>
+
+  <!-- Fluffy Cloud Right -->
+  <g fill="#ffffff">
+    <circle cx="80" cy="96" r="14"/>
+    <circle cx="92" cy="90" r="16"/>
+    <circle cx="104" cy="98" r="14"/>
+    <rect x="70" y="94" width="48" height="18" rx="6"/>
+  </g>
+
+  <!-- Sparkly Golden Stars -->
+  <polygon points="64,12 66,20 74,22 66,24 64,32 62,24 54,22 62,20" fill="#fde047" stroke="#eab308" stroke-width="0.8"/>
+  <polygon points="28,26 29,31 34,32 29,34 28,39 27,34 22,32 27,31" fill="#fde047"/>
+  <polygon points="100,28 101,33 106,34 101,36 100,41 99,36 94,34 99,33" fill="#fde047"/>
+</svg>

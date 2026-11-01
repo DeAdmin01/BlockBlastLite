@@ -1,0 +1,49 @@
+@using BlockBlastLite.Models
+@using BlockBlastLite.Services
+
+<div class="board-wrapper skin-@CurrentSkin" id="game-board" data-skin="@CurrentSkin">
+    <div class="board-grid">
+        @for (int r = 0; r < GameEngine.BoardSize; r++)
+        {
+            for (int c = 0; c < GameEngine.BoardSize; c++)
+            {
+                int row = r;
+                int col = c;
+                var cell = Board[row, col];
+
+                string cellClass = "board-cell";
+                if (cell.IsFilled)
+                {
+                    cellClass += $" filled block-c{cell.ColorIndex} skin-{CurrentSkin}";
+                }
+                if (cell.IsClearing)
+                {
+                    cellClass += " clearing";
+                }
+                if (cell.IsPreview)
+                {
+                    cellClass += cell.IsValidPlacementPreview 
+                        ? $" preview-valid block-c{cell.PreviewColor} skin-{CurrentSkin}" 
+                        : " preview-invalid";
+                }
+                if (cell.WillBeCleared)
+                {
+                    cellClass += " will-blast";
+                }
+
+                <div class="@cellClass"
+                     @key="@($"cell_{row}_{col}")"
+                     @onclick="() => OnCellClick.InvokeAsync((row, col))">
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public GridCell[,] Board { get; set; } = default!;
+    [Parameter] public string CurrentSkin { get; set; } = "jewel";
+    [Parameter] public EventCallback<(int row, int col)> OnCellClick { get; set; }
+
+    public void Refresh() => StateHasChanged();
+}

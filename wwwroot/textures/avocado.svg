@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Dark Avocado Skin Gradient -->
+    <linearGradient id="avoSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b3820"/>
+      <stop offset="50%" stop-color="#0f2414"/>
+      <stop offset="100%" stop-color="#051208"/>
+    </linearGradient>
+
+    <!-- Creamy Flesh Radial Gradient -->
+    <radialGradient id="avoFlesh" cx="50%" cy="54%" r="55%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="45%" stop-color="#d9f99d"/>
+      <stop offset="78%" stop-color="#84cc16"/>
+      <stop offset="100%" stop-color="#3f6212"/>
+    </radialGradient>
+
+    <!-- Big Glossy Pit Gradient -->
+    <radialGradient id="avoPit" cx="38%" cy="36%" r="62%">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="35%" stop-color="#78350f"/>
+      <stop offset="75%" stop-color="#451a03"/>
+      <stop offset="100%" stop-color="#1c0a02"/>
+    </radialGradient>
+
+    <!-- Pit Rim Shadow Gradient -->
+    <radialGradient id="pitRim" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#2d4a0f"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 1. Dark Textured Outer Skin (Edge to Edge) -->
+  <rect width="128" height="128" rx="16" fill="url(#avoSkin)"/>
+  <!-- Bumpy skin texture dots on corners -->
+  <circle cx="8" cy="8" r="2" fill="#2d5a35" opacity="0.7"/>
+  <circle cx="120" cy="8" r="2" fill="#2d5a35" opacity="0.7"/>
+  <circle cx="8" cy="120" r="2" fill="#2d5a35" opacity="0.7"/>
+  <circle cx="120" cy="120" r="2" fill="#2d5a35" opacity="0.7"/>
+  <circle cx="14" cy="40" r="1.8" fill="#2d5a35" opacity="0.6"/>
+  <circle cx="114" cy="40" r="1.8" fill="#2d5a35" opacity="0.6"/>
+
+  <!-- 2. Luscious Lime & Chartreuse Flesh Bed -->
+  <rect x="7" y="7" width="114" height="114" rx="14" fill="url(#avoFlesh)" stroke="#4d7c0f" stroke-width="1.5"/>
+
+  <!-- Flesh highlight aura -->
+  <ellipse cx="64" cy="62" rx="42" ry="44" fill="#fef9c3" opacity="0.45"/>
+
+  <!-- 3. Pit Indentation Rim (Depression shadow) -->
+  <circle cx="64" cy="65" r="32" fill="url(#pitRim)"/>
+  <ellipse cx="64" cy="68" rx="30" ry="29" fill="#2e480d" opacity="0.4"/>
+
+  <!-- 4. Massive Cartoon Avocado Pit (Centered, glossy, 3D) -->
+  <circle cx="64" cy="64" r="28" fill="url(#avoPit)" stroke="#260e02" stroke-width="2.5"/>
+
+  <!-- Pit Wood/Seed Grain Lines -->
+  <path d="M 52,48 Q 46,64 52,78" stroke="#92400e" stroke-width="1.8" fill="none" opacity="0.4" stroke-linecap="round"/>
+  <path d="M 76,48 Q 82,64 76,78" stroke="#92400e" stroke-width="1.8" fill="none" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Pit Specular White Curved Shine (Bright cartoon eye-like gleam) -->
+  <ellipse cx="53" cy="53" rx="7" ry="4.5" transform="rotate(-30 53 53)" fill="#ffffff" opacity="0.95"/>
+  <circle cx="46" cy="62" r="2.2" fill="#ffffff" opacity="0.8"/>
+
+  <!-- Subtle bounce-light on bottom right of the pit -->
+  <path d="M 56,86 A 24 24 0 0 0 84,70" stroke="#f59e0b" stroke-width="2.2" fill="none" opacity="0.5" stroke-linecap="round"/>
+
+  <!-- 5. Fresh Dew / Glints on the smooth lime flesh -->
+  <ellipse cx="28" cy="28" rx="4.5" ry="3" transform="rotate(-25 28 28)" fill="#ffffff" opacity="0.7"/>
+  <circle cx="98" cy="30" r="3" fill="#ffffff" opacity="0.6"/>
+  <circle cx="100" cy="98" r="2.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="28" cy="98" r="2.5" fill="#ffffff" opacity="0.5"/>
+
+  <!-- Top Specular Rim Glaze -->
+  <path d="M 16,14 Q 64,22 112,14" stroke="#ffffff" stroke-width="2.2" fill="none" opacity="0.5" stroke-linecap="round"/>
+
+  <!-- Outer Chunky Cartoon Border -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="15" fill="none" stroke="#0f2414" stroke-width="3" opacity="0.9"/>
+</svg>

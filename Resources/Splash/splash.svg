@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <!-- Sapphire Blue Gradient -->
+    <linearGradient id="splashBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+
+    <!-- Ruby Pink Gradient -->
+    <linearGradient id="splashPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="50%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#be185d"/>
+    </linearGradient>
+
+    <!-- Emerald Green Gradient -->
+    <linearGradient id="splashGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="50%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+
+    <!-- Amber Gold Gradient -->
+    <linearGradient id="splashGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Title Gold 3D Gradient -->
+    <linearGradient id="titleGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#fef08a"/>
+      <stop offset="70%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Radial Glow Behind Blocks -->
+    <radialGradient id="centerGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ambient Glow Behind Elements -->
+  <circle cx="256" cy="200" r="180" fill="url(#centerGlow)"/>
+
+  <!-- Starburst Sparkles Behind -->
+  <g fill="#fde047" opacity="0.85">
+    <!-- Star 1 Top Left -->
+    <polygon points="120,90 123,105 138,108 123,111 120,126 117,111 102,108 117,105"/>
+    <!-- Star 2 Top Right -->
+    <polygon points="380,80 383,95 398,98 383,101 380,116 377,101 362,98 377,95"/>
+    <!-- Star 3 Right Middle -->
+    <polygon points="410,210 412,220 422,222 412,224 410,234 408,224 398,222 408,220"/>
+    <!-- Star 4 Left Middle -->
+    <polygon points="90,220 92,230 102,232 92,234 90,244 88,234 78,232 88,230"/>
+  </g>
+
+  <!-- ==================== 4 CARTOON 3D BLOCKS CLUSTER ==================== -->
+  <g transform="translate(0, -10)">
+    <!-- 1. Sapphire Blue Block (Top-Left) -->
+    <g transform="translate(150, 100)">
+      <!-- Drop Shadow -->
+      <rect x="6" y="8" width="94" height="94" rx="20" fill="#020617" opacity="0.4"/>
+      <!-- Main Block -->
+      <rect width="94" height="94" rx="20" fill="url(#splashBlue)" stroke="#7dd3fc" stroke-width="3"/>
+      <!-- Inner Bevel/Facet -->
+      <rect x="10" y="10" width="74" height="74" rx="14" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.6"/>
+      <!-- Glossy Reflection Arc -->
+      <path d="M 14 34 C 28 18, 66 18, 80 34 C 64 26, 30 26, 14 34 Z" fill="#ffffff" opacity="0.75"/>
+      <!-- Gleam Sparkle -->
+      <polygon points="72,24 74,29 79,30 74,31 72,36 70,31 65,30 70,29" fill="#ffffff"/>
+    </g>
+
+    <!-- 2. Ruby Pink Block (Top-Right) -->
+    <g transform="translate(268, 100)">
+      <!-- Drop Shadow -->
+      <rect x="6" y="8" width="94" height="94" rx="20" fill="#020617" opacity="0.4"/>
+      <!-- Main Block -->
+      <rect width="94" height="94" rx="20" fill="url(#splashPink)" stroke="#f9a8d4" stroke-width="3"/>
+      <!-- Inner Bevel/Facet -->
+      <rect x="10" y="10" width="74" height="74" rx="14" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.6"/>
+      <!-- Glossy Reflection Arc -->
+      <path d="M 14 34 C 28 18, 66 18, 80 34 C 64 26, 30 26, 14 34 Z" fill="#ffffff" opacity="0.75"/>
+      <!-- Gleam Sparkle -->
+      <polygon points="26,24 28,29 33,30 28,31 26,36 24,31 19,30 24,29" fill="#ffffff"/>
+    </g>
+
+    <!-- 3. Emerald Green Block (Bottom-Left) -->
+    <g transform="translate(150, 218)">
+      <!-- Drop Shadow -->
+      <rect x="6" y="8" width="94" height="94" rx="20" fill="#020617" opacity="0.4"/>
+      <!-- Main Block -->
+      <rect width="94" height="94" rx="20" fill="url(#splashGreen)" stroke="#86efac" stroke-width="3"/>
+      <!-- Inner Bevel/Facet -->
+      <rect x="10" y="10" width="74" height="74" rx="14" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.6"/>
+      <!-- Glossy Reflection Arc -->
+      <path d="M 14 34 C 28 18, 66 18, 80 34 C 64 26, 30 26, 14 34 Z" fill="#ffffff" opacity="0.75"/>
+      <!-- Gleam Sparkle -->
+      <polygon points="72,70 74,74 78,75 74,76 72,80 70,76 66,75 70,74" fill="#ffffff"/>
+    </g>
+
+    <!-- 4. Amber Gold Block (Bottom-Right) -->
+    <g transform="translate(268, 218)">
+      <!-- Drop Shadow -->
+      <rect x="6" y="8" width="94" height="94" rx="20" fill="#020617" opacity="0.4"/>
+      <!-- Main Block -->
+      <rect width="94" height="94" rx="20" fill="url(#splashGold)" stroke="#fef08a" stroke-width="3"/>
+      <!-- Inner Bevel/Facet -->
+      <rect x="10" y="10" width="74" height="74" rx="14" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.6"/>
+      <!-- Glossy Reflection Arc -->
+      <path d="M 14 34 C 28 18, 66 18, 80 34 C 64 26, 30 26, 14 34 Z" fill="#ffffff" opacity="0.75"/>
+      <!-- Gleam Sparkle -->
+      <polygon points="30,70 32,74 36,75 32,76 30,80 28,76 24,75 28,74" fill="#ffffff"/>
+    </g>
+  </g>
+
+  <!-- ==================== COMIC 3D "BLOCK BLAST" LOGO ==================== -->
+  <!-- Outer Deep Shadow -->
+  <text x="256" y="386"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-size="46"
+        font-weight="950"
+        letter-spacing="4"
+        text-anchor="middle"
+        fill="#020617">
+    BLOCK BLAST
+  </text>
+
+  <!-- 3D Extrusion Layer -->
+  <text x="256" y="383"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-size="46"
+        font-weight="950"
+        letter-spacing="4"
+        text-anchor="middle"
+        fill="#78350f"
+        stroke="#451a03"
+        stroke-width="8"
+        stroke-linejoin="round">
+    BLOCK BLAST
+  </text>
+
+  <!-- Main Radiant Lettering -->
+  <text x="256" y="380"
+        font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+        font-size="46"
+        font-weight="950"
+        letter-spacing="4"
+        text-anchor="middle"
+        fill="url(#titleGold)"
+        stroke="#9a3412"
+        stroke-width="3"
+        stroke-linejoin="round">
+    BLOCK BLAST
+  </text>
+
+  <!-- "L I T E" Neon Cyan Pill Badge -->
+  <g transform="translate(196, 412)">
+    <rect width="120" height="28" rx="14" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+    <text x="60" y="19"
+          font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
+          font-size="14"
+          font-weight="900"
+          letter-spacing="6"
+          text-anchor="middle"
+          fill="#ffffff">
+      LITE
+    </text>
+  </g>
+</svg>

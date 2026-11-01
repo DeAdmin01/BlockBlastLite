@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="frogSkin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="40%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Frog Body Rounded Cube -->
+  <rect width="128" height="128" rx="20" fill="url(#frogSkin)" stroke="#15803d" stroke-width="2"/>
+
+  <!-- Frog Eye Pods popping out -->
+  <circle cx="36" cy="32" r="22" fill="url(#frogSkin)" stroke="#15803d" stroke-width="2"/>
+  <circle cx="92" cy="32" r="22" fill="url(#frogSkin)" stroke="#15803d" stroke-width="2"/>
+
+  <!-- Frog Eye Whites -->
+  <circle cx="36" cy="32" r="16" fill="#ffffff" stroke="#15803d" stroke-width="1.5"/>
+  <circle cx="92" cy="32" r="16" fill="#ffffff" stroke="#15803d" stroke-width="1.5"/>
+
+  <!-- Big Black Pupils -->
+  <circle cx="38" cy="32" r="10" fill="#0f172a"/>
+  <circle cx="90" cy="32" r="10" fill="#0f172a"/>
+
+  <!-- Sparkly Eye Reflections -->
+  <circle cx="35" cy="28" r="3.5" fill="#ffffff"/>
+  <circle cx="41" cy="35" r="1.5" fill="#ffffff"/>
+  <circle cx="87" cy="28" r="3.5" fill="#ffffff"/>
+  <circle cx="93" cy="35" r="1.5" fill="#ffffff"/>
+
+  <!-- Rosy Cheeks -->
+  <ellipse cx="26" cy="74" rx="10" ry="7" fill="#f472b6" opacity="0.6"/>
+  <ellipse cx="102" cy="74" rx="10" ry="7" fill="#f472b6" opacity="0.6"/>
+
+  <!-- Tiny Nostrils -->
+  <circle cx="58" cy="62" r="1.8" fill="#15803d"/>
+  <circle cx="70" cy="62" r="1.8" fill="#15803d"/>
+
+  <!-- Huge Happy Frog Smile -->
+  <path d="M 32 72 Q 64 104 96 72" stroke="#14532d" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <!-- Tongue pop -->
+  <path d="M 54 84 Q 64 98 74 84 Z" fill="#fb7185"/>
+
+  <!-- Under-chin belly patch -->
+  <path d="M 36 126 Q 64 106 92 126 Z" fill="#dcfce7" opacity="0.7"/>
+</svg>

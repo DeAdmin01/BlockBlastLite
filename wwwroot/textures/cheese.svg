@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="cheeseBase" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffdf59"/>
+      <stop offset="50%" stop-color="#ffba08"/>
+      <stop offset="100%" stop-color="#f48c06"/>
+    </linearGradient>
+    <linearGradient id="hole1" x1="25%" y1="20%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#c86d04"/>
+      <stop offset="70%" stop-color="#e85d04"/>
+      <stop offset="100%" stop-color="#ffba08"/>
+    </linearGradient>
+    <linearGradient id="hole2" x1="30%" y1="20%" x2="70%" y2="90%">
+      <stop offset="0%" stop-color="#b05d03"/>
+      <stop offset="75%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#ffca3a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Solid Cheese Body with subtle bevel -->
+  <rect width="128" height="128" rx="14" fill="url(#cheeseBase)"/>
+  <rect x="2" y="2" width="124" height="124" rx="12" fill="none" stroke="#ffeaa7" stroke-width="2.5" opacity="0.8"/>
+
+  <!-- Big 3D Cartoon Cheese Hole 1 -->
+  <ellipse cx="40" cy="40" rx="20" ry="18" fill="url(#hole1)"/>
+  <!-- Highlight on hole bottom-edge -->
+  <path d="M22,42 C25,56 55,56 58,42 C54,53 26,53 22,42 Z" fill="#fff3b0" opacity="0.9"/>
+  <!-- Depth shadow inside hole top -->
+  <path d="M22,40 C24,26 56,26 58,40 C54,30 26,30 22,40 Z" fill="#9e4300" opacity="0.6"/>
+
+  <!-- Medium Cheese Hole 2 -->
+  <ellipse cx="94" cy="84" rx="17" ry="15" fill="url(#hole2)"/>
+  <path d="M79,85 C82,97 107,97 109,85 C106,94 82,94 79,85 Z" fill="#fff3b0" opacity="0.85"/>
+  <path d="M79,83 C82,73 107,73 109,83 C106,75 82,75 79,83 Z" fill="#9e4300" opacity="0.55"/>
+
+  <!-- Small Cheese Holes -->
+  <ellipse cx="96" cy="30" rx="9" ry="8" fill="#d97706"/>
+  <path d="M88,31 C90,37 103,37 104,31 C102,36 90,36 88,31 Z" fill="#fff3b0" opacity="0.8"/>
+
+  <ellipse cx="32" cy="98" rx="11" ry="10" fill="#d97706"/>
+  <path d="M22,99 C24,107 41,107 42,99 C40,105 24,105 22,99 Z" fill="#fff3b0" opacity="0.8"/>
+
+  <circle cx="68" cy="74" r="5" fill="#c86d04"/>
+  <circle cx="68" cy="18" r="3.5" fill="#c86d04"/>
+
+  <!-- Glossy top specular curve -->
+  <path d="M12,12 Q64,4 116,12 Q64,18 12,12 Z" fill="#ffffff" opacity="0.45"/>
+</svg>

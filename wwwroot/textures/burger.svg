@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Bun Top Gradient -->
+    <linearGradient id="bunTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="30%" stop-color="#fba857"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <!-- Bun Bottom Gradient -->
+    <linearGradient id="bunBottom" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fba857"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <!-- Patty Gradient -->
+    <linearGradient id="pattyFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78350f"/>
+      <stop offset="50%" stop-color="#451a03"/>
+      <stop offset="100%" stop-color="#260e02"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Full-bleed background bun layer -->
+  <rect width="128" height="128" rx="14" fill="#b45309"/>
+
+  <!-- Top Bun (Fills top ~42% edge to edge) -->
+  <path d="M 0,14 C 0,5 5,0 14,0 L 114,0 C 123,0 128,5 128,14 L 128,50 C 100,54 28,54 0,50 Z" fill="url(#bunTop)"/>
+  <!-- Specular top gloss curve -->
+  <path d="M 12,12 Q 64,24 116,12 Q 64,4 12,12 Z" fill="#ffffff" opacity="0.5"/>
+
+  <!-- Sesame Seeds (Scattered across the top bun) -->
+  <ellipse cx="28" cy="22" rx="4" ry="2.2" transform="rotate(-25 28 22)" fill="#ffffff" stroke="#d97706" stroke-width="0.8"/>
+  <ellipse cx="52" cy="16" rx="4.2" ry="2.3" transform="rotate(10 52 16)" fill="#ffffff" stroke="#d97706" stroke-width="0.8"/>
+  <ellipse cx="78" cy="18" rx="4" ry="2.2" transform="rotate(-15 78 18)" fill="#ffffff" stroke="#d97706" stroke-width="0.8"/>
+  <ellipse cx="102" cy="24" rx="3.8" ry="2.1" transform="rotate(30 102 24)" fill="#ffffff" stroke="#d97706" stroke-width="0.8"/>
+  <ellipse cx="38" cy="36" rx="4" ry="2.2" transform="rotate(15 38 36)" fill="#ffffff" stroke="#d97706" stroke-width="0.8"/>
+  <ellipse cx="66" cy="32" rx="4.2" ry="2.3" transform="rotate(-5 66 32)" fill="#ffffff" stroke="#d97706" stroke-width="0.8"/>
+  <ellipse cx="92" cy="36" rx="4" ry="2.2" transform="rotate(20 92 36)" fill="#ffffff" stroke="#d97706" stroke-width="0.8"/>
+
+  <!-- Crisp Wavy Lettuce Layer (Edge-to-edge) -->
+  <path d="M 0,48 Q 16,38 32,48 Q 48,36 64,48 Q 80,36 96,48 Q 112,38 128,48 L 128,62 Q 96,68 64,62 Q 32,68 0,62 Z" fill="#22c55e" stroke="#15803d" stroke-width="2"/>
+  <path d="M 12,48 Q 22,43 32,48 M 48,46 Q 56,41 64,46 M 80,46 Q 88,41 96,46 M 110,48 Q 118,43 126,48" stroke="#86efac" stroke-width="2" fill="none"/>
+
+  <!-- Ripe Juicy Tomato Slice -->
+  <rect x="0" y="60" width="128" height="14" fill="#ef4444"/>
+  <line x1="0" y1="60" x2="128" y2="60" stroke="#991b1b" stroke-width="1.5"/>
+  <line x1="0" y1="74" x2="128" y2="74" stroke="#991b1b" stroke-width="1.5"/>
+  <circle cx="28" cy="67" r="3" fill="#fca5a5"/>
+  <circle cx="64" cy="67" r="3" fill="#fca5a5"/>
+  <circle cx="100" cy="67" r="3" fill="#fca5a5"/>
+
+  <!-- Melted Cheddar Cheese (With dripping cartoon points) -->
+  <path d="M 0,72 L 128,72 L 128,82 L 118,88 L 102,78 L 84,92 L 66,78 L 44,90 L 26,78 L 12,88 L 0,80 Z" fill="#facc15" stroke="#ca8a04" stroke-width="1.5"/>
+
+  <!-- Grilled Beef Patty (Thick and hearty) -->
+  <rect x="0" y="80" width="128" height="24" fill="url(#pattyFill)"/>
+  <line x1="0" y1="80" x2="128" y2="80" stroke="#260e02" stroke-width="2"/>
+  <line x1="0" y1="104" x2="128" y2="104" stroke="#260e02" stroke-width="2"/>
+  <!-- Grill marks -->
+  <line x1="22" y1="84" x2="36" y2="100" stroke="#170801" stroke-width="3" stroke-linecap="round"/>
+  <line x1="54" y1="84" x2="68" y2="100" stroke="#170801" stroke-width="3" stroke-linecap="round"/>
+  <line x1="86" y1="84" x2="100" y2="100" stroke="#170801" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Bottom Bun (Fills bottom to the edge) -->
+  <path d="M 0,102 L 128,102 L 128,114 C 128,123 123,128 114,128 L 14,128 C 5,128 0,123 0,114 Z" fill="url(#bunBottom)"/>
+  <line x1="0" y1="104" x2="128" y2="104" stroke="#fed7aa" stroke-width="2" opacity="0.6"/>
+
+  <!-- Outer Chunky Cartoon Border -->
+  <rect x="1.5" y="1.5" width="125" height="125" rx="13" fill="none" stroke="#78350f" stroke-width="3" opacity="0.8"/>
+</svg>

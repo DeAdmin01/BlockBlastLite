@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <!-- Glass tube highlights -->
+    <linearGradient id="neonTubeGlass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="45%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.0"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.2"/>
+    </linearGradient>
+    <radialGradient id="neonRadialCenter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ambient background glow disc (Hardware accelerated radial gradient) -->
+  <circle cx="64" cy="64" r="54" fill="url(#neonRadialCenter)"/>
+
+  <!-- Outer Neon Tube Body: multi-layered vector aura (Zero filter rasterization) -->
+  <rect x="16" y="16" width="96" height="96" rx="20" fill="none" stroke="#ffffff" stroke-width="16" opacity="0.12"/>
+  <rect x="16" y="16" width="96" height="96" rx="20" fill="none" stroke="#ffffff" stroke-width="10" opacity="0.35"/>
+  <rect x="16" y="16" width="96" height="96" rx="20" fill="none" stroke="#ffffff" stroke-width="6" opacity="0.75"/>
+
+  <!-- Intense White-Hot Core Light -->
+  <rect x="16" y="16" width="96" height="96" rx="20" fill="none" stroke="#ffffff" stroke-width="3.5"/>
+
+  <!-- Specular Glass Tube Glint -->
+  <path d="M26,20 L102,20 C106,20 108,22 108,26" fill="none" stroke="url(#neonTubeGlass)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Corner Neon Mount Electrodes -->
+  <circle cx="24" cy="24" r="5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="24" cy="24" r="2.5" fill="#111827"/>
+  <circle cx="104" cy="24" r="5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="104" cy="24" r="2.5" fill="#111827"/>
+  <circle cx="24" cy="104" r="5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="24" cy="104" r="2.5" fill="#111827"/>
+  <circle cx="104" cy="104" r="5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="104" cy="104" r="2.5" fill="#111827"/>
+
+  <!-- Center Energy Star Pulse -->
+  <path d="M64,52 L65.5,62.5 L76,64 L65.5,65.5 L64,76 L62.5,65.5 L52,64 L62.5,62.5 Z" fill="#ffffff" opacity="0.85"/>
+</svg>
